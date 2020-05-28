@@ -15,6 +15,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { JwtHttpInterceptor } from './JwtHttpInterceptor';
 
+import {MatButtonModule} from '@angular/material/button';
+
 export function tokenGetter() {
   console.log("token !!!");
   return localStorage.getItem("token");
@@ -32,6 +34,7 @@ export function tokenGetter() {
     MatInputModule,
     FormsModule,
     ReactiveFormsModule,
+    MatButtonModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
