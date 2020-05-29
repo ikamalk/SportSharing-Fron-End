@@ -16,6 +16,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { JwtHttpInterceptor } from './JwtHttpInterceptor';
 
 import {MatButtonModule} from '@angular/material/button';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 export function tokenGetter() {
   console.log("token !!!");
@@ -25,7 +26,8 @@ export function tokenGetter() {
   declarations: [
     AppComponent,
     RegisterComponent,
-    LoginComponent
+    LoginComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
@@ -33,6 +35,7 @@ export function tokenGetter() {
     HttpClientModule,
     MatInputModule,
     FormsModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production, registrationStrategy: 'registerImmediately' }),
     ReactiveFormsModule,
     MatButtonModule,
     JwtModule.forRoot({
@@ -42,7 +45,6 @@ export function tokenGetter() {
         blacklistedRoutes: ["http://localhost:1212/register","http://localhost:1212/authenticate"],
       },
     }),
-    ServiceWorkerModule.register('sw-custom.js', { enabled: environment.production }),
     BrowserAnimationsModule
   ],
   providers: [],

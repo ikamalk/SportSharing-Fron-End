@@ -1,27 +1,62 @@
-#background{
-    background: url("../../../assets/background.jpg");
-    width: 100%;
-    height: 100vh;
-    background-size: cover;
-    background-position: center;
-    position: absolute;
-}
-
-#card{
-    position: absolute;
-    top: 150px;
-    width: 300px;
-    left: calc(50% - 200px);
-    border-radius: 20px;
-    background-color: rgba(255, 255, 255, 0.651);
-    padding: 50px;
-    form {
-        mat-form-field{
-            width: 100%;
-        }
-        button {
-            width: 100%;
-            border-radius: 20px;
+#container{
+    #background{
+        background: url("../../../assets/background.jpg");
+        width: 100%;
+        height: 100vh;
+        background-size: cover;
+        background-position: center;
+        position: absolute;
+    }
+    
+    #card{
+        position: absolute;
+        top: 150px;
+        width: 300px;
+        left: calc(50% - 200px);
+        border-radius: 20px;
+        background-color: rgba(255, 255, 255, 0.651);
+        padding: 50px;
+        box-shadow: 0 0 13px 0px #5d5d5d;
+        form {
+            mat-form-field{
+                width: 100%;
+            }
+            button {
+                width: 100%;
+                border-radius: 20px;
+            }
         }
     }
 }
+
+.blur-me{
+    animation: blur-me 1s ease 0s;
+    filter: blur(10px);
+}
+
+.no-blur{
+    animation: no-blur 1s ease 0s;
+    filter: blur(0);
+}
+
+#loading-container{
+  
+}
+
+@keyframes blur-me {
+    0% {
+      filter: blur(0);
+    }
+    100% {
+        filter: blur(10px);
+    }
+  }
+
+  @keyframes no-blur {
+    0% {
+      filter: blur(10px);
+    }
+    100% {
+        filter: blur(0);
+    }
+  }
