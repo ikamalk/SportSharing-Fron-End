@@ -35,8 +35,7 @@ export class LoginComponent implements OnInit {
         }, 1000);
     }).catch(error=>{
       this.isLoading= false;
-
-    })
+    });
     
   }
 

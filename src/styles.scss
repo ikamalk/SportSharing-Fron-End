@@ -28,5 +28,17 @@ $StagingProject-theme: mat-light-theme($StagingProject-primary, $StagingProject-
 
 /* You can add global styles to this file, and also import other style files */
 
+$custom-typography: mat-typography-config(
+  $font-family: 'Quicksand, sans-serif',
+  $headline: mat-typography-level(32px, 48px, 700),
+  $body-1: mat-typography-level(16px, 24px, 500)
+);
+
+@include angular-material-typography($custom-typography);
+
+
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { margin: 0; font-family: 'Quicksand', sans-serif; }
+
+$font-color-black:#4e4e4e;
+$font-color-gray:#8b8b8b

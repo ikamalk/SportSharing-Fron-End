@@ -1,0 +1,16 @@
+
+<ng-container>
+    <div class="header">
+        <app-navbar></app-navbar>
+
+    </div>
+
+    <mat-sidenav-container class="container">
+        <mat-sidenav class="side-nav" mode="side" #sidenav opened>
+            <app-menu></app-menu>
+        </mat-sidenav>
+        <mat-sidenav-content>
+           <!-- <p><button mat-button (click)="sidenav.toggle()">sidenav.toggle()</button></p> -->
+            <app-content></app-content></mat-sidenav-content>
+      </mat-sidenav-container>
+</ng-container>

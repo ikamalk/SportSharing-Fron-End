@@ -1,0 +1,25 @@
+@import "../../../../styles.scss";
+#container{
+    height: 90px;
+    background-color: rgb(255, 255, 255);
+    #content{
+        padding: 10px;
+        margin-left: 20vw;
+        height: 70px;
+
+        #title-container{
+            height: 60px;
+            margin-top: 10px;
+            display: inline;
+            #title{
+                font-size: 30px;
+                color: $font-color-black;
+                font-weight: 600;
+            }
+            #description{
+                margin-top: 10px;
+                color: $font-color-gray;
+            }
+        }
+    }
+}

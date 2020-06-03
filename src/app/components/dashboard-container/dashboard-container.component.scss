@@ -1,0 +1,22 @@
+.container {
+    position: absolute;
+    top: 90px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: white;
+    mat-sidenav{
+        background-color: white;
+        border: 0 !important;
+    }
+    mat-sidenav-content{
+        min-height: calc(100% - 60px);
+    }
+  }
+  .header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: white;
+  }
