@@ -1,5 +1,50 @@
+@import "../../../../styles.scss";
 #container{
-    min-width: 20vw;
-    background-color: purple;
+    min-width: 275px;
+    background-color: rgb(255, 255, 255);
     height: calc(100vh - 90px);
+
+    #list-container {
+        padding: 20px 0px;
+        border-radius: 20px;
+        background-color: #fff;
+        text-align: left !important;
+        //cursor: pointer;
+        .item {
+          color: #849b87;
+          text-align: left;
+          padding: 20px 10px ;
+          outline: 0;
+          cursor: pointer;
+          i {
+            font-size: 22px;
+            margin: 10px 20px 10px 20px;
+          }
+          div {
+            font-size: 16px;
+            display: inline-block;
+          }
+        }
+        .item:hover {
+          background-color: #e9f6ff;
+        }
+    
+        .active {
+            font-weight: 700;
+          position: relative;
+          color: $primary-color;
+          background-color: #e9f6ff;
+          outline: 0;
+          .indicator {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 4px;
+            height: 40px;
+            background-color: $primary-color;
+            border-radius: 50px;
+            height: 75px;
+          }
+        }
+      }
 }

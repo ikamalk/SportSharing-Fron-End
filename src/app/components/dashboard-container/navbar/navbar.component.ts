@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SharedService } from 'src/app/services/shared.service';
 
 @Component({
   selector: 'app-navbar',
@@ -6,10 +7,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
-
-  constructor() { }
+  tab:String = "board";
+  constructor(private sharedService:SharedService) {
+    this.sharedService.getNewTab().subscribe((tab)=>{
+      this.tab = tab;
+      console.log(this.tab);
+    });
+  }
 
   ngOnInit(): void {
+
   }
 
 }

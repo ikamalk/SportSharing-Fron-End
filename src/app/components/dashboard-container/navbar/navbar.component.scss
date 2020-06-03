@@ -2,24 +2,103 @@
 #container{
     height: 90px;
     background-color: rgb(255, 255, 255);
+    #logo{
+        display: inline-block;
+        vertical-align: middle;
+        height: 90px;
+        top: -10px;
+        position: relative;
+        img{
+            width: calc(275px - 40px);
+            margin: 0 20px;
+            display: inline-block;
+        }
+    }
     #content{
         padding: 10px;
-        margin-left: 20vw;
+        margin-left: 10px;
         height: 70px;
+        display: inline-block;
 
         #title-container{
             height: 60px;
             margin-top: 10px;
-            display: inline;
-            #title{
-                font-size: 30px;
+            display: inline-block;
+            .title{
+                font-size: 25px;
                 color: $font-color-black;
                 font-weight: 600;
+                animation: tracking-in-expand 0.7s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
             }
-            #description{
+            .description{
                 margin-top: 10px;
                 color: $font-color-gray;
+                animation: tracking-in-expand 0.7s cubic-bezier(0.215, 0.610, 0.355, 1.000) both 1s;
             }
+        }
+        #profile-container{
+            display: inline-block;
+            position: absolute;
+            right: 10px;
+            #profile{
+                display: flex;
+                align-items: center;
+
+                #image-profile{
+                    width: 60px;
+                    height: 60px;
+                    display: inline-block;
+                    border: gray dotted 1px;
+                    border-radius: 50%;
+                    margin-right: 10px;
+    
+                }
+                #full-name-container{
+                    display: inline-block;
+                    user-select: none;
+                    #full-name{
+                       color: $font-color-black;
+                    }
+                    #description{
+                        color: $font-color-gray;
+                    }
+                }
+                #devider{
+                    height: 60px;
+                    width: 1px;
+                    margin: 0 30px 0 40px;
+                    background-color: rgb(226, 226, 226);
+                }
+                #logout{
+                    margin-right: 30px;
+                    font-size: 30px;
+                    background: -webkit-linear-gradient($primary-color, $primary-color-light-2);
+                    -webkit-background-clip: text;
+                    -webkit-text-fill-color: transparent;
+                    cursor: pointer;
+                }
+                #logout:hover{
+                    background: -webkit-linear-gradient($primary-color-light-2, $primary-color-light-3);
+                    -webkit-background-clip: text;
+                    -webkit-text-fill-color: transparent;
+                    cursor: pointer;
+                }
+            }
+          
         }
     }
 }
+
+
+@keyframes tracking-in-expand {
+    0% {
+      letter-spacing: -0.5em;
+      opacity: 0;
+    }
+    40% {
+      opacity: 0.6;
+    }
+    100% {
+      opacity: 1;
+    }
+  }

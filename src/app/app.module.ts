@@ -21,6 +21,9 @@ import { ContentComponent } from './components/dashboard-container/content/conte
 import { MatSidenavModule } from '@angular/material/sidenav';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import { NavbarComponent } from './components/dashboard-container/navbar/navbar.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { ProfileComponent } from './components/profile/profile.component';
+import { MyRequestComponent } from './components/my-request/my-request.component';
 export function tokenGetter() {
   console.log("token !!!");
   return localStorage.getItem("token");
@@ -33,7 +36,10 @@ export function tokenGetter() {
     DashboardContainerComponent,
     MenuComponent,
     ContentComponent,
-    NavbarComponent
+    NavbarComponent,
+    DashboardComponent,
+    ProfileComponent,
+    MyRequestComponent
   ],
   imports: [
     BrowserModule,
