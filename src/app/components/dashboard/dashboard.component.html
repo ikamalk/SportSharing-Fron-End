@@ -1,5 +1,151 @@
+<div id="list-container">
+    <div class="list">
+        <img class="background-img" src="assets/basketball.png" alt="">
+        <div class="title">
+            <img src="assets/basketball.png" alt="">
+            <div>Basketball</div>
+        </div>
+        <div class="type">
+            <div class="item">
+                <div>10</div>
+              <div>Players</div>  
+            </div>
+            <div class="item">
+                <div>2</div>
+                <div>Missing</div>
+            </div>
+            <div class="item">
+                <div>
+                    <div class="stars-outer" style="font-size:15px">
+                        <div class="stars-inner"  class="stars-inner"
+                        [ngStyle]="{ width: stars(3) }"></div>
+                      </div>
+                </div>
+                <div>
+                   Skill level
+                </div>
+            </div>
+        </div>
+        <div class="devider"></div>
+        <div class="location-time-container">
+            <div class="time">
+                <i class="fa fa-clock-o"></i>
+                <div>11/11/2011 at 15:15pm</div>
+            </div>
+            <div class="location">
+                <i class="fa fa-map-marker"></i>
+                <div>Williamsport, Pennsylvania</div>
+            </div>
+        </div>
+        <div class="devider"></div>
+        <div class="info">
+            <div class="profile-container">
+                <div class="profile">
+                    <ngx-avatar name="Kamal Ait-Sidhoum" class="image-profile"></ngx-avatar>
+                     <div class="full-name-container">
+                         <div class="full-name">
+                             Kamal Ait Sidhoum
+                         </div>
+                         <div class="description">
+                             Desc ??!
+                         </div>
+                     </div>
+                 </div>
+            </div>
+               
+
+            <div class="position-btn-container">
+                <button mat-raised-button color="primary">See position</button>
+            </div>
+            <div class="accept-btn-container">
+                
+                <button mat-raised-button color="primary">Join</button>
+
+            </div>
+
+        </div>
+    </div>
+    <div class="list">
+        <img class="background-img" src="assets/basketball.png" alt="">
+        <div class="title">
+            <img src="assets/basketball.png" alt="">
+            <div>Basketball</div>
+        </div>
+        <div class="type">
+            <div class="item">
+                <div>10</div>
+              <div>Players</div>  
+            </div>
+            <div class="item">
+                <div>2</div>
+                <div>Missing</div>
+            </div>
+            <div class="item">
+                <div>
+                    <div class="stars-outer" style="font-size:15px">
+                        <div class="stars-inner"  class="stars-inner"
+                        [ngStyle]="{ width: stars(3) }"></div>
+                      </div>
+                </div>
+                <div>
+                   Skill level
+                </div>
+            </div>
+        </div>
+        <div class="devider"></div>
+        <div class="location-time-container">
+            <div class="time">
+                <i class="fa fa-clock-o"></i>
+                <div>11/11/2011 at 15:15pm</div>
+            </div>
+            <div class="location">
+                <i class="fa fa-map-marker"></i>
+                <div>Williamsport, Pennsylvania</div>
+            </div>
+        </div>
+        <div class="devider"></div>
+        <div class="info">
+            <div class="profile-container">
+                <div class="profile">
+                    <ngx-avatar name="Kamal Ait-Sidhoum" class="image-profile"></ngx-avatar>
+                     <div class="full-name-container">
+                         <div class="full-name">
+                             Kamal Ait Sidhoum
+                         </div>
+                         <div class="description">
+                             Desc ??!
+                         </div>
+                     </div>
+                 </div>
+            </div>
+               
+
+            <div class="position-btn-container">
+                <button mat-raised-button color="primary">See position</button>
+            </div>
+            <div class="accept-btn-container">
+                
+                <button mat-raised-button color="primary">Join</button>
+
+            </div>
+
+        </div>
+    </div>
+</div>
 <div id="maps-container">
+
     <agm-map [latitude]="latitude" 
     [longitude]="longitude" 
-    [zoom]="zoom"></agm-map>
+    [zoom]="zoom">
+    <agm-marker [latitude]="latitude" [longitude]="longitude" [markerDraggable]="false"
+   [iconUrl]="{
+    url: './assets/pin.png',
+    scaledSize: {
+        width: 60,
+        height: 60
+    }}"
+    ></agm-marker>
+    </agm-map>
 </div>
+
+

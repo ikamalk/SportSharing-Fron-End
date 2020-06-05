@@ -26,4 +26,10 @@ export class DashboardComponent implements OnInit {
       });
   }
 
+  stars(val) {
+    const starPercentage = (val / 5) * 100;
+    const starPercentageRounded = `${(starPercentage / 10) * 10}%`;
+    return starPercentageRounded;
+  }
+
 }

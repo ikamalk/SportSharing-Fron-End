@@ -40,7 +40,7 @@ $custom-typography: mat-typography-config(
 html, body { height: 100%; }
 body { margin: 0; font-family: 'Quicksand', sans-serif; }
 
-$primary-color:#1B9F01;
+$primary-color:#2E7D32;
 $primary-color-light-1:#388E3C;
 $primary-color-light-2:#43A047;
 $primary-color-light-3:#4CAF50;
@@ -52,3 +52,51 @@ $font-color-gray:#8b8b8b;
 #maps-container > agm-map > div.agm-map-container-inner.sebm-google-map-container-inner{
     border-radius: 0 20px 20px 0 !important;
 }
+
+
+
+.stars-outer {
+    display: inline-block;
+    position: relative;
+    font-family: FontAwesome;
+  }
+  
+  .stars-outer::before {
+    content: "\f006 \f006 \f006 \f006 \f006";
+    color: #f8ce0b;
+
+  }
+  
+  .stars-inner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 0;
+  }
+  
+  .stars-inner::before {
+    content: "\f005 \f005 \f005 \f005 \f005";
+    color: #f8ce0b;
+
+    
+  }
+
+
+  ::-webkit-scrollbar {
+    width: 10px;
+  
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+  ::-webkit-scrollbar-thumb {
+    background:  $primary-color;
+    border-radius: 50px;
+    border: $primary-color solid 1px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
