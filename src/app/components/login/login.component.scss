@@ -1,4 +1,5 @@
-#container{
+@import "../../../styles.scss";
+/*#container{
     #background{
         background: url("../../../assets/background.jpg");
         width: 100%;
@@ -58,5 +59,303 @@
     }
     100% {
         filter: blur(0);
+    }
+  }
+
+
+
+
+
+
+
+
+
+
+  
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  /*******************************************************************************************/
+#background{
+    position: absolute;
+    width: 100%;
+    height: 100vh;
+    background:url("../../../assets/background.jpg");
+    background-position: center;
+    background-size: cover;
+  }
+  
+  
+  
+  
+  
+  #card{
+    position: absolute;
+    left: calc(50% - 500px);
+    top: 80px;
+    width: 1000px;
+    border: $primary-color solid 1px;
+    border-radius: 20px;
+    height: 500px;
+    display: block;
+    margin: auto;
+    box-shadow: -5px 1px 20px #00000082;
+    clip-path: circle(80% at 50% 50%);
+      animation: 1.5s anime-card both 1.5s, fade-in 1s ease-in 0.2s both;
+  
+      #welcome{
+        #logo{
+          width: 250px;
+          display: block;
+          margin: 146px auto;
+          padding: 110px 0;
+        }
+      }
+  }
+  
+  .row{
+    border-radius: 20px;
+    opacity: 1;
+    animation: 3s smooth-anime both;
+  
+  }
+  
+  .left{
+    background-color: #fffaf5;
+    border-radius: 0 20px 20px 0;
+    opacity: .95;
+    #logo{
+      display: block;
+      margin: auto;
+      width: 200px;
+    }
+    #form-container{
+      padding: 30px 70px;
+      mat-form-field {
+  
+        input {
+          width: 90%;
+          height: 30px;
+          border-radius: 20px;
+          padding: 0 10px;
+        }
+        mat-icon {
+          width: 10%;
+          font-size: 30px;
+          color: $primary-color;
+        }
+      }
+      button{
+        width: 100%;
+        font-size: 18px;
+        border: 2px solid $primary-color;
+      }
+      button:hover{
+        width: 100%;
+        font-size: 18px;
+        border: 2px solid $primary-color;
+        background-color: white !important;
+        color: $primary-color;
+      }
+      #no-account{
+        color: rgb(65, 65, 65);
+        text-align: center;
+        margin-top: 20px;
+        span{
+          color: $primary-color;
+          font-weight: 700;
+          cursor: pointer;
+        }
+        span:hover{
+          cursor: pointer;
+          text-decoration: underline;
+        }
+      }
+    }
+    #register-container{
+      padding: 0 70px;
+      height: 370px;
+      overflow: auto;
+      mat-form-field {
+  
+        input {
+          width: 100%;
+          height: 30px;
+          border-radius: 20px;
+          padding: 0 10px;
+        }
+      }
+      button{
+        width: 100%;
+        font-size: 18px;
+        border: 2px solid $primary-color;
+      }
+      button:hover{
+        width: 100%;
+        font-size: 18px;
+        border: 2px solid $primary-color;
+        background-color: white !important;
+        color: $primary-color;
+      }
+      #no-account{
+        color: rgb(65, 65, 65);
+        text-align: center;
+        margin-top: 20px;
+        span{
+          color: $primary-color;
+          font-weight: 700;
+          cursor: pointer;
+        }
+        span:hover{
+          cursor: pointer;
+          text-decoration: underline;
+        }
+      }
+    }
+  
+  }
+  
+  
+  
+  .right{
+    border-radius: 20px 0 0 20px;
+    position: relative;
+    .background{
+        background: url("../../../assets/background.svg");
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: 0 20px 20px 0;
+      z-index: 0;
+      filter: sepia(10);
+    }
+    #layer{
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      background-color: $primary-color;
+      opacity: .8;
+      border-radius: 0 20px 20px 0;
+    }
+    #layer-success{
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      background-color: green;
+      opacity: .8;
+      border-radius: 0 20px 20px 0;
+    }
+    #layer-failure{
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      background-color: red;
+      opacity: .8;
+      border-radius: 0 20px 20px 0;
+    }
+    #slides{
+      color: white;
+      z-index: 2;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      user-select: none;
+      .carousel-inner{
+        .carousel-item{
+          i{
+            margin-top: 120px;
+            font-size: 150px;
+          }
+          .title{
+            font-size: 30px;
+            font-weight: 700;
+          }
+          .text{
+            font-size: 25px;
+          }
+        }
+      }
+    }
+  }
+  .text-anime{
+    animation: text-anime 1s cubic-bezier(0.215, 0.610, 0.355, 1.000) 0s both;
+  }
+  .login-success, .login-failure{
+    position: absolute;
+      line-height: 500px;
+      width: 100%;
+      color: white;
+      z-index: 2;
+      text-align: center;
+      white-space: pre;
+      font-size: 20px;
+  }
+  
+  /*******************ANIME****************************/
+  
+  @-webkit-keyframes text-anime {
+    0% {
+      letter-spacing: -0.5em;
+      opacity: 0;
+    }
+    40% {
+      opacity: 0.6;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  @keyframes text-anime {
+    0% {
+      letter-spacing: -0.5em;
+      opacity: 0;
+    }
+    40% {
+      opacity: 0.6;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  
+  
+  @keyframes anime-card {
+    0% {clip-path: circle(20% at 50% 50%);}
+    100% { clip-path: circle(80% at 50% 50%);
+    }
+  }
+  
+  
+  @keyframes fade-in {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  
+  @keyframes smooth-anime {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
     }
   }

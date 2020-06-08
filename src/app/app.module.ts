@@ -12,11 +12,15 @@ import { HttpClientModule } from "@angular/common/http";
 import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
 
-import {MatInputModule} from '@angular/material/input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
+import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
+import {MatSelectModule} from '@angular/material/select';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatIconModule} from '@angular/material/icon';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
+
 import { DashboardContainerComponent } from './components/dashboard-container/dashboard-container.component';
 import { MenuComponent } from './components/dashboard-container/menu/menu.component';
 import { ContentComponent } from './components/dashboard-container/content/content.component';
@@ -49,11 +53,15 @@ export function tokenGetter() {
     HttpClientModule,
     MatInputModule,
     FormsModule,
+    MatIconModule,
+    MatButtonToggleModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production, registrationStrategy: 'registerImmediately' }),
     ReactiveFormsModule,
     MatButtonModule,
     MatSidenavModule,
     MatToolbarModule,
+    MatSelectModule,
+
     AvatarModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyAJnZ3a5krUFvldtEnnNE6RUYRKD1-AISo'
