@@ -237,7 +237,7 @@
       position: absolute;
       width: 100%;
       height: 100%;
-      border-radius: 0 20px 20px 0;
+      border-radius: 20px 0 0 20px;
       z-index: 0;
       filter: sepia(10);
     }
@@ -248,7 +248,7 @@
       z-index: 1;
       background-color: $primary-color;
       opacity: .8;
-      border-radius: 0 20px 20px 0;
+      border-radius: 20px 0 0 20px;
     }
     #layer-success{
       position: absolute;
@@ -257,7 +257,7 @@
       z-index: 1;
       background-color: green;
       opacity: .8;
-      border-radius: 0 20px 20px 0;
+      border-radius: 20px 0 0 20px;
     }
     #layer-failure{
       position: absolute;
@@ -266,7 +266,7 @@
       z-index: 1;
       background-color: red;
       opacity: .8;
-      border-radius: 0 20px 20px 0;
+      border-radius: 20px 0 0 20px;
     }
     #slides{
       color: white;

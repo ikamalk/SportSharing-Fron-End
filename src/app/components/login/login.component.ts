@@ -75,7 +75,16 @@ export class LoginComponent implements OnInit {
   }*/
 
   login(){
-
+    this.service.login(this.loginForm.value.username,this.loginForm.value.password).then((resp)=>{
+      console.log(resp);
+      localStorage.setItem("token",resp["jwt"]);
+     console.log(localStorage.getItem("token"));
+        this.service.hello();
+        setTimeout(() => {
+          this.router.navigate(["dashboard"]);
+        }, 1000);
+    }).catch(error=>{
+    });
   }
 
   register(){
