@@ -1,7 +1,8 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, ChangeDetectorRef } from '@angular/core';
 import { ServiceService } from 'src/app/service.service';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AccountService } from 'src/app/services/account.service';
 declare var $;
 
 @Component({
@@ -24,7 +25,8 @@ export class LoginComponent implements OnInit {
   isLoginFailure = false;
   @ViewChild("msgRegister",{static:false}) msgRegister:ElementRef;
 
-  constructor(private service:ServiceService,public formBuilder: FormBuilder,private router:Router) {
+  constructor(private service:ServiceService,public formBuilder: FormBuilder,private router:Router,
+    private accountService:AccountService, private changeDetector : ChangeDetectorRef) {
     this.loginForm = this.formBuilder.group({
       username: ['', Validators.required],
       password: ['', Validators.required],
@@ -39,7 +41,6 @@ export class LoginComponent implements OnInit {
       password: ["", Validators.required],
       firstname: ["", Validators.required],
       lastname: ["", Validators.required],
-      email: ["", Validators.email],
       phoneNumber: [
         "",
         Validators.pattern(/^(\([0-9]{3}\) |[0-9]{3}-)[0-9]{3}-[0-9]{4}$/),
@@ -50,11 +51,9 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    setTimeout(() => {
       $('#slides').carousel({
         interval: 3000,
       });
-    }, 3500);
   }
 
  /* login(){
@@ -79,20 +78,58 @@ export class LoginComponent implements OnInit {
       console.log(resp);
       localStorage.setItem("token",resp["jwt"]);
      console.log(localStorage.getItem("token"));
-        this.service.hello();
+     this.accountService.getAccountSession(this.loginForm.value.username);
+        this.successLogin();
         setTimeout(() => {
           this.router.navigate(["dashboard"]);
         }, 1000);
     }).catch(error=>{
+
     });
   }
 
   register(){
-
+    this.accountService.addAccount(this.registerForm.value).then((res)=>{
+      console.log(
+        'ok'
+      );
+      this.MsgRegister();
+      this.isRegisterSuccess = true;
+      this.isLogin = true;
+    }).catch(error=>{
+      console.log(
+        error
+      );
+    })
   }
+
 
   toggle() {
     this.isLogin = !this.isLogin;
   }
+
+
+    // when credentials are verifired, this fucntion is called and produces the success message.
+    successLogin() {
+      this.isWelcome = false;
+      this.isLoginSuccess = true;
+      this.isRegisterSuccess = false;
+      this.isLoginFailure = false;
+    }
+    // when credentials are not verified, this fucntion is called and produces the failure message.
+    failureLogin() {
+      this.isWelcome = false;
+      this.isLoginSuccess = false;
+      this.isRegisterSuccess = false;
+      this.isLoginFailure = true;
+    }
+    // this fucntion is called when registration is successful.
+    MsgRegister() {
+      this.isWelcome = false;
+      this.isLoginSuccess = false;
+      this.isRegisterSuccess = true;
+      this.isLoginFailure = false;
+      this.changeDetector.detectChanges();
+    }
 
 }

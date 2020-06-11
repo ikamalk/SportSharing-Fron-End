@@ -35,8 +35,8 @@
                 <div class="carousel-inner">
                   <div class="carousel-item active" data-interval="1000">
                     <i class="fa fa-blind  fa-3x center1" aria-hidden="true"></i>
-                      <h5 class="title">Find Drivers</h5>
-                      <p class="text">Find drivers in your area.</p>
+                      <h5 class="title">Find Players</h5>
+                      <p class="text">Find players in your area.</p>
                   </div>
                   <div class="carousel-item" data-interval="1000">
                     <i class="fa fa-group  fa-3x center1" aria-hidden="true"></i>
@@ -62,7 +62,7 @@
             </div>
             <div *ngIf="isRegisterSuccess">
               <div class="login-success text-anime">
-                <span style="font-size: 15px;" #msgRegister></span>
+                <span style="font-size: 15px;" #msgRegister>Thank you for choosing us {{registerForm.value.username}}</span>
               </div>
               <div id="layer">
               </div>
@@ -106,10 +106,10 @@
               <mat-label>Last Name</mat-label>
               <input type="text" matInput formControlName="lastname"  required>
             </mat-form-field>
-            <mat-form-field class="w-100">
+  <!---          <mat-form-field class="w-100">
               <mat-label>Email</mat-label>
               <input type="email" matInput formControlName="email"  required>
-            </mat-form-field>
+            </mat-form-field>--> 
             <mat-form-field class="w-100">
               <mat-label>Username</mat-label>
               <input type="text" matInput formControlName="username"  required>

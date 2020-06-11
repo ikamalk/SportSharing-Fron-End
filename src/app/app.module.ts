@@ -70,7 +70,6 @@ export function tokenGetter() {
     MatSidenavModule,
     MatToolbarModule,
     MatSelectModule,
-
     AvatarModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyAJnZ3a5krUFvldtEnnNE6RUYRKD1-AISo',
