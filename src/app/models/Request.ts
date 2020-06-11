@@ -7,4 +7,6 @@ export interface Request {
     player:number,
     skill_level:number,
     time_schedule:string,
+    address:string,
+    
   }

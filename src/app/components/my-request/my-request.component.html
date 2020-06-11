@@ -1,1 +1,97 @@
-<p>my-request works!</p>
+<div id="container">
+    <div id="add">
+        <button mat-raised-button color="primary" class="float-right m-3" (click)="openDialog()"><i class="fa fa-plus" aria-hidden="true"></i>
+          Add request</button>
+     </div>
+     <div id="list-container">
+         <div class="list">
+             <img class="background-img" src="assets/basketball.png" alt="">
+             <div class="title">
+                 <img src="assets/basketball.png" alt="">
+                 <div>Basketball</div>
+             </div>
+             <div class="type">
+                 <div class="item">
+                     <div>10</div>
+                   <div>Players</div>
+                 </div>
+                 <div class="item">
+                     <div>2</div>
+                     <div>Missing</div>
+                 </div>
+                 <div class="item">
+                     <div>
+                         <div class="stars-outer" style="font-size:15px">
+                             <div class="stars-inner"  class="stars-inner"
+                             [ngStyle]="{ width: stars(3) }"></div>
+                           </div>
+                     </div>
+                     <div>
+                        Skill level
+                     </div>
+                 </div>
+             </div>
+             <div class="devider"></div>
+             <div class="location-time-container">
+                 <div class="time">
+                     <i class="fa fa-clock-o"></i>
+                     <div>11/11/2011 at 15:15pm</div>
+                 </div>
+                 <div class="location">
+                     <i class="fa fa-map-marker"></i>
+                     <div>Williamsport, Pennsylvania</div>
+                 </div>
+             </div>
+             <div class="devider"></div>
+             <div class="participant">
+                 <div class="txt m-3">Participants</div>
+     
+                 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+     
+                     <!--- Note that these columns can be defined in any order.
+                           The actual rendered columns are set as a property on the row definition" -->
+                   
+                     <!-- Position Column -->
+                     <ng-container matColumnDef="position">
+                       <th mat-header-cell *matHeaderCellDef> No. </th>
+                       <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+                     </ng-container>
+                   
+                     <!-- Name Column -->
+                     <ng-container matColumnDef="name">
+                       <th mat-header-cell *matHeaderCellDef> Name </th>
+                       <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                     </ng-container>
+                   
+                     <!-- Weight Column -->
+                     <ng-container matColumnDef="weight">
+                       <th mat-header-cell *matHeaderCellDef> Age </th>
+                       <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
+                     </ng-container>
+                   
+                     <!-- Symbol Column -->
+                     <ng-container matColumnDef="symbol">
+                       <th mat-header-cell *matHeaderCellDef> Contact </th>
+                       <td mat-cell *matCellDef="let element"> <button mat-raised-button>{{element.symbol}}</button> </td>
+                     </ng-container>
+                   
+                     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                   </table>
+             </div>
+             <div class="devider"></div>
+     
+             <div class="info">
+                 <div class="position-btn-container">
+                     <button mat-raised-button color="warn">Delete</button>
+                 </div>
+                 <div class="accept-btn-container">
+     
+                     <button mat-raised-button color="primary">Modify</button>
+     
+                 </div>
+     
+             </div>
+         </div>
+     </div>
+</div>
