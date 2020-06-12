@@ -8,7 +8,7 @@
         background-position: center;
         position: absolute;
     }
-    
+
     #card{
         position: absolute;
         top: 150px;
@@ -41,7 +41,7 @@
 }
 
 #loading-container{
-  
+
 }
 
 @keyframes blur-me {
@@ -71,7 +71,7 @@
 
 
 
-  
+
 */
 
 
@@ -92,15 +92,17 @@
     position: absolute;
     width: 100%;
     height: 100vh;
-    background:url("../../../assets/background.jpg");
+    background:url("../../../assets/PickupBackground.png");
     background-position: center;
     background-size: cover;
+    animation: 1.5s bluranim both 1.5s, fade-in 1s ease-in 0.2s both;
+
   }
-  
-  
-  
-  
-  
+
+
+
+
+
   #card{
     position: absolute;
     left: calc(50% - 500px);
@@ -114,24 +116,24 @@
     box-shadow: -5px 1px 20px #00000082;
     clip-path: circle(80% at 50% 50%);
       animation: 1.5s anime-card both 1.5s, fade-in 1s ease-in 0.2s both;
-  
+
       #welcome{
         #logo{
-          width: 250px;
+          width: 500px;
           display: block;
           margin: 146px auto;
           padding: 110px 0;
         }
       }
   }
-  
+
   .row{
     border-radius: 20px;
     opacity: 1;
     animation: 3s smooth-anime both;
-  
+
   }
-  
+
   .left{
     background-color: #fffaf5;
     border-radius: 0 20px 20px 0;
@@ -144,7 +146,7 @@
     #form-container{
       padding: 30px 70px;
       mat-form-field {
-  
+
         input {
           width: 90%;
           height: 30px;
@@ -189,7 +191,7 @@
       height: 370px;
       overflow: auto;
       mat-form-field {
-  
+
         input {
           width: 100%;
           height: 30px;
@@ -224,11 +226,11 @@
         }
       }
     }
-  
+
   }
-  
-  
-  
+
+
+
   .right{
     border-radius: 20px 0 0 20px;
     position: relative;
@@ -306,9 +308,9 @@
       white-space: pre;
       font-size: 20px;
   }
-  
+
   /*******************ANIME****************************/
-  
+
   @-webkit-keyframes text-anime {
     0% {
       letter-spacing: -0.5em;
@@ -333,15 +335,15 @@
       opacity: 1;
     }
   }
-  
-  
+
+
   @keyframes anime-card {
-    0% {clip-path: circle(20% at 50% 50%);}
-    100% { clip-path: circle(80% at 50% 50%);
+    0% {clip-path: polygon(0 10%, 100% 10%, 100% 72%, 0 72%);}
+    100% { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
     }
   }
-  
-  
+
+
   @keyframes fade-in {
     0% {
       opacity: 0;
@@ -350,12 +352,21 @@
       opacity: 1;
     }
   }
-  
+
   @keyframes smooth-anime {
     0% {
       opacity: 0;
     }
     100% {
       opacity: 1;
+    }
+  }
+
+  @keyframes bluranim {
+    0%{
+      filter: blur(0px);
+    }
+    100%{
+      filter: blur(1px);
     }
   }
