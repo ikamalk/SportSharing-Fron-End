@@ -294,7 +294,7 @@ export class DashboardComponent implements OnInit {
 
   getAllRequest(){
     this.requestService.getAllRequest().then(requests=>{
-      this.requests = requests;
+      this.requests = requests.reverse();
       console.log(this.requests);
       this.generateMarker();
       
@@ -323,11 +323,12 @@ export class DashboardComponent implements OnInit {
           if (status === 'OK') {
             console.log(results[0].geometry.location.lat()+" "+results[0].geometry.location.lng());
             let marker = {
-              lat:parseInt(results[0].geometry.location.lat()),
-              lng:parseInt(results[0].geometry.location.lng()),
+              lat:results[0].geometry.location.lat(),
+              lng:results[0].geometry.location.lng(),
               sport_type:type_sport
             };
             this.markers.push(marker);
+            console.log(this.markers);
           } else {
             alert('Geocode was not successful for the following reason: ' + status);
           }
