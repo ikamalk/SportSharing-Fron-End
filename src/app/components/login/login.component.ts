@@ -55,7 +55,7 @@ export class LoginComponent implements OnInit {
       $('#slides').carousel({
         interval: 3000,
       }); 
-    }, 2000);
+    }, 2100);
 
   }
 
