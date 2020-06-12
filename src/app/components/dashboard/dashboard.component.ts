@@ -1,14 +1,24 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
+import { RequestService } from 'src/app/services/request.service';
+import { Account } from 'src/app/models/Account';
+import { MapsAPILoader } from '@agm/core';
+import { Marker } from 'src/app/models/Marker';
+declare var google;
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
+
 export class DashboardComponent implements OnInit {
+  private geocoder: any;
   latitude: number;
   longitude: number;
   zoom: number;
+  requests:Request[];
+  markers:Marker[] = [];
+  account:Account;
   style = [
     {
       "elementType": "geometry",
@@ -261,12 +271,34 @@ export class DashboardComponent implements OnInit {
     }
   ];
 
-  constructor() {
+  constructor(private requestService:RequestService,private mapsAPILoader: MapsAPILoader,
+    private ngZone: NgZone) {
+    this.account = JSON.parse(localStorage.getItem("account"));
     this.setCurrentLocation();
-
+    this.getAllRequest();
   }
 
   ngOnInit(): void {
+
+  }
+
+  generateMarker(){
+    this.mapsAPILoader.load().then(() => {
+      this.geocoder = new google.maps.Geocoder;
+      this.requests.forEach(request => {
+        this.geocodeAddress(request['address'],request['sport_type']);
+      });
+   });
+
+  }
+
+  getAllRequest(){
+    this.requestService.getAllRequest().then(requests=>{
+      this.requests = requests;
+      console.log(this.requests);
+      this.generateMarker();
+      
+    })
   }
 
 
@@ -282,6 +314,24 @@ export class DashboardComponent implements OnInit {
     const starPercentage = (val / 5) * 100;
     const starPercentageRounded = `${(starPercentage / 10) * 10}%`;
     return starPercentageRounded;
+
+  }
+
+
+  geocodeAddress(address:string,type_sport:string) {
+    this.geocoder.geocode({'address': address}, (results, status) => {
+          if (status === 'OK') {
+            console.log(results[0].geometry.location.lat()+" "+results[0].geometry.location.lng());
+            let marker = {
+              lat:parseInt(results[0].geometry.location.lat()),
+              lng:parseInt(results[0].geometry.location.lng()),
+              sport_type:type_sport
+            };
+            this.markers.push(marker);
+          } else {
+            alert('Geocode was not successful for the following reason: ' + status);
+          }
+    });
   }
 
 }

@@ -100,3 +100,24 @@ $font-color-gray:#8b8b8b;
   ::-webkit-scrollbar-thumb:hover {
     background: #555;
   }
+
+  table {
+    thead{
+      tr{
+        background-color: $primary-color !important;
+        th{
+          text-align: center !important;
+          color: white !important;
+          font-weight: 700 !important;
+        }
+      }
+    }
+    tbody{
+      tr{
+        td{
+          text-align: center !important;
+
+        }
+      }
+    }
+  }

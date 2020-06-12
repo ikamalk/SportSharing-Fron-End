@@ -1,0 +1,65 @@
+<h2 mat-dialog-title>Add new request</h2>
+<form [formGroup]="requestForm" (submit)="sendRequest()">
+<mat-dialog-content class="mat-typography">
+        <mat-form-field class="w-100">
+            <mat-label>Type</mat-label>
+            <mat-select id="sport" formControlName="sport_type" required>
+              <mat-option value="" selected disabled>Select a sport</mat-option>
+              <mat-option value="Soccer">Soccer</mat-option>
+              <mat-option value="Baseball">Baseball</mat-option>
+              <mat-option value="Basketball">Basketball</mat-option>
+              <mat-option value="Frisbee">Frisbee</mat-option>
+              <mat-option value="Football">Football</mat-option>
+              <mat-option value="Lacrosse">Lacrosse</mat-option>
+              <mat-option value="Bowling">Bowling</mat-option>
+              <mat-option value="Golf">Golf</mat-option>
+              <mat-option value="Volleyball">Volleyball</mat-option>
+
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="w-100">
+            <mat-label>Number of players</mat-label>
+            <mat-select id="sport" formControlName="player" required>
+              <mat-option value="" selected disabled>Select a number</mat-option>
+              <mat-option value="1">1</mat-option>
+              <mat-option value="2">2</mat-option>
+              <mat-option value="3">3</mat-option>
+              <mat-option value="4">4</mat-option>
+              <mat-option value="5">5</mat-option>
+              <mat-option value="6">6</mat-option>
+              <mat-option value="7">7</mat-option>
+              <mat-option value="8">8</mat-option>
+              <mat-option value="9">9</mat-option>
+              <mat-option value="10">10</mat-option>
+              <mat-option value="11">11</mat-option>
+
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="w-100">
+            <mat-label>Skill level</mat-label>
+            <mat-select id="sport" formControlName="skill_level" required>
+              <mat-option value="" selected disabled>Select a skill level</mat-option>
+              <mat-option value="1">Newbie</mat-option>
+              <mat-option value="2">Novice</mat-option>
+              <mat-option value="3">Intermediate</mat-option>
+              <mat-option value="4">Senior</mat-option>
+              <mat-option value="5">Professional</mat-option>
+
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field class="w-100">
+            <input #search matInput formControlName="address" type="text" placeholder="Address" autocorrect="off" autocapitalize="off" spellcheck="off" type="text">
+          </mat-form-field>
+        <mat-form-field class="w-100">
+            <input matInput formControlName="time_schedule" type="datetime-local" placeholder="start date">
+          </mat-form-field>
+
+  
+</mat-dialog-content>
+<mat-dialog-actions align="center">
+    <button type="submit" mat-raised-button color="primary" cdkFocusInitial>Submit</button>
+  <button mat-stroked-button mat-dialog-close>Cancel</button>
+</mat-dialog-actions>
+</form>

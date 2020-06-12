@@ -20,6 +20,8 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import {MatTableModule} from '@angular/material/table';
+import {MatDialogModule} from '@angular/material/dialog';
 
 import { DashboardContainerComponent } from './components/dashboard-container/dashboard-container.component';
 import { MenuComponent } from './components/dashboard-container/menu/menu.component';
@@ -30,11 +32,15 @@ import { NavbarComponent } from './components/dashboard-container/navbar/navbar.
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { MyRequestComponent } from './components/my-request/my-request.component';
+import { RequestDialog } from './components/my-request/requestDialog/request-dialog';
 export function tokenGetter() {
   console.log("token !!!");
   return localStorage.getItem("token");
 }
 @NgModule({
+  entryComponents:[
+    RequestDialog
+  ],
   declarations: [
     AppComponent,
     RegisterComponent,
@@ -45,7 +51,8 @@ export function tokenGetter() {
     NavbarComponent,
     DashboardComponent,
     ProfileComponent,
-    MyRequestComponent
+    MyRequestComponent,
+    RequestDialog
   ],
   imports: [
     BrowserModule,
@@ -55,16 +62,18 @@ export function tokenGetter() {
     FormsModule,
     MatIconModule,
     MatButtonToggleModule,
+    MatTableModule,
+    MatDialogModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production, registrationStrategy: 'registerImmediately' }),
     ReactiveFormsModule,
     MatButtonModule,
     MatSidenavModule,
     MatToolbarModule,
     MatSelectModule,
-
     AvatarModule,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyAJnZ3a5krUFvldtEnnNE6RUYRKD1-AISo'
+      apiKey: 'AIzaSyAJnZ3a5krUFvldtEnnNE6RUYRKD1-AISo',
+      libraries: ["places"]
     }),
     JwtModule.forRoot({
       config: {

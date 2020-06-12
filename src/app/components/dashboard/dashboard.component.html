@@ -1,24 +1,82 @@
 <div id="list-container">
-    <div class="list">
-        <img class="background-img" src="assets/basketball.png" alt="">
+    <div class="list" *ngFor="let request of requests">
+        <div [ngSwitch]="request.sport_type">
+            <div *ngSwitchCase="'Basketball'">
+                <img class="background-img" src="assets/Basketball.png" alt="">
+            </div>
+            <div *ngSwitchCase="'Soccer'">
+                <img class="background-img" src="assets/Soccer.png" alt="">
+            </div>
+            <div *ngSwitchCase="'Baseball'">
+                <img class="background-img" src="assets/Baseball.png" alt="">
+            </div>
+            <div *ngSwitchCase="'Frisbee'">
+                <img class="background-img" src="assets/Frisbee.png" alt="">
+            </div>
+            <div *ngSwitchCase="'Football'">
+                <img class="background-img" src="assets/Football.png" alt="">
+            </div>
+            <div *ngSwitchCase="'Lacrosse'">
+                <img class="background-img" src="assets/Lacrosse.png" alt="">
+            </div>
+            <div *ngSwitchCase="'Bowling'">
+                <img class="background-img" src="assets/Bowling.png" alt="">
+            </div>
+            <div *ngSwitchCase="'Golf'">
+                <img class="background-img" src="assets/Golf.png" alt="">
+            </div>
+            <div *ngSwitchCase="'Volleyball'">
+                <img class="background-img" src="assets/Volleyball.png" alt="">
+            </div>
+            <div *ngSwitchDefault></div>
+        </div>
         <div class="title">
-            <img src="assets/basketball.png" alt="">
-            <div>Basketball</div>
+            <div [ngSwitch]="request.sport_type">
+                <div *ngSwitchCase="'Basketball'">
+                    <img src="assets/Basketball.png" alt="">
+                </div>
+                <div *ngSwitchCase="'Soccer'">
+                    <img src="assets/Soccer.png" alt="">
+                </div>
+                <div *ngSwitchCase="'Baseball'">
+                    <img src="assets/Baseball.png" alt="">
+                </div>
+                <div *ngSwitchCase="'Frisbee'">
+                    <img src="assets/Frisbee.png" alt="">
+                </div>
+                <div *ngSwitchCase="'Football'">
+                    <img src="assets/Football.png" alt="">
+                </div>
+                <div *ngSwitchCase="'Lacrosse'">
+                    <img src="assets/Lacrosse.png" alt="">
+                </div>
+                <div *ngSwitchCase="'Bowling'">
+                    <img src="assets/Bowling.png" alt="">
+                </div>
+                <div *ngSwitchCase="'Golf'">
+                    <img src="assets/Golf.png" alt="">
+                </div>
+                <div *ngSwitchCase="'Volleyball'">
+                    <img src="assets/Volleyball.png" alt="">
+                </div>
+                <div *ngSwitchDefault></div>
+            </div>
+            <div>{{request.sport_type}}</div>
         </div>
         <div class="type">
             <div class="item">
-                <div>10</div>
+                <div>{{request.player}}</div>
               <div>Players</div>
             </div>
             <div class="item">
-                <div>2</div>
+                <div>{{request.player - request.participants.length}}</div>
                 <div>Missing</div>
             </div>
             <div class="item">
                 <div>
                     <div class="stars-outer" style="font-size:15px">
                         <div class="stars-inner"  class="stars-inner"
-                        [ngStyle]="{ width: stars(3) }"></div>
+                        [ngStyle]="{ width: stars(request.skill_level) }"></div>
                       </div>
                 </div>
                 <div>
@@ -30,24 +88,24 @@
         <div class="location-time-container">
             <div class="time">
                 <i class="fa fa-clock-o"></i>
-                <div>11/11/2011 at 15:15pm</div>
+                <div>{{request.time_schedule.split("T")[0]}} at {{request.time_schedule.split("T")[1]}}</div>
             </div>
             <div class="location">
                 <i class="fa fa-map-marker"></i>
-                <div>Williamsport, Pennsylvania</div>
+                <div>{{request.address}}</div>
             </div>
         </div>
         <div class="devider"></div>
         <div class="info">
             <div class="profile-container">
                 <div class="profile">
-                    <ngx-avatar name="Kamal Ait-Sidhoum" class="image-profile"></ngx-avatar>
+                    <ngx-avatar name="{{request.account.firstname}} {{request.account.lastname}}" class="image-profile"></ngx-avatar>
                      <div class="full-name-container">
                          <div class="full-name">
-                             Kamal Ait Sidhoum
+                            {{request.account.firstname}} {{request.account.lastname}}
                          </div>
                          <div class="description">
-                             Desc ??!
+                            {{request.account.city}},{{request.account.state}}
                          </div>
                      </div>
                  </div>
@@ -59,73 +117,7 @@
             </div>
             <div class="accept-btn-container">
 
-                <button mat-raised-button color="primary">Join</button>
-
-            </div>
-
-        </div>
-    </div>
-    <div class="list">
-        <img class="background-img" src="assets/basketball.png" alt="">
-        <div class="title">
-            <img src="assets/basketball.png" alt="">
-            <div>Basketball</div>
-        </div>
-        <div class="type">
-            <div class="item">
-                <div>10</div>
-              <div>Players</div>
-            </div>
-            <div class="item">
-                <div>2</div>
-                <div>Missing</div>
-            </div>
-            <div class="item">
-                <div>
-                    <div class="stars-outer" style="font-size:15px">
-                        <div class="stars-inner"  class="stars-inner"
-                        [ngStyle]="{ width: stars(3) }"></div>
-                      </div>
-                </div>
-                <div>
-                   Skill level
-                </div>
-            </div>
-        </div>
-        <div class="devider"></div>
-        <div class="location-time-container">
-            <div class="time">
-                <i class="fa fa-clock-o"></i>
-                <div>11/11/2011 at 15:15pm</div>
-            </div>
-            <div class="location">
-                <i class="fa fa-map-marker"></i>
-                <div>Williamsport, Pennsylvania</div>
-            </div>
-        </div>
-        <div class="devider"></div>
-        <div class="info">
-            <div class="profile-container">
-                <div class="profile">
-                    <ngx-avatar name="Kamal Ait-Sidhoum" class="image-profile"></ngx-avatar>
-                     <div class="full-name-container">
-                         <div class="full-name">
-                             Kamal Ait Sidhoum
-                         </div>
-                         <div class="description">
-                             Desc ??!
-                         </div>
-                     </div>
-                 </div>
-            </div>
-
-
-            <div class="position-btn-container">
-                <button mat-raised-button color="primary">See position</button>
-            </div>
-            <div class="accept-btn-container">
-
-                <button mat-raised-button color="primary">Join</button>
+                <button mat-raised-button color="primary" [disabled]="account['id'] = request.account.id">Join</button>
 
             </div>
 
@@ -138,7 +130,7 @@
     [longitude]="longitude"
     [zoom]="zoom"
     [styles]="style">
-    <agm-marker [latitude]="latitude" [longitude]="longitude" [markerDraggable]="false"
+    <agm-marker *ngFor="let marker of markers" [latitude]="marker.lat" [longitude]="marker.lng" [markerDraggable]="false"
    [iconUrl]="{
     url: './assets/pin.png',
     scaledSize: {
