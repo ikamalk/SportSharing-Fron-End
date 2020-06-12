@@ -132,7 +132,7 @@
     [styles]="style">
     <agm-marker *ngFor="let marker of markers" [latitude]="marker.lat" [longitude]="marker.lng" [markerDraggable]="false"
    [iconUrl]="{
-    url: './assets/pin.png',
+    url: './assets/pins/'+marker.sport_type+'Pin.png',
     scaledSize: {
         width: 60,
         height: 60

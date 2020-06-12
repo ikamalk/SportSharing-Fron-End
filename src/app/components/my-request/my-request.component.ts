@@ -27,7 +27,7 @@ export class MyRequestComponent implements OnInit {
 
   getRequestById(id:number){
     this.requestService.getRequestByAccountId(id).then(requests=>{
-      this.requests = requests;
+      this.requests = requests.reverse();
     })
   }
 
