@@ -51,9 +51,12 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    setTimeout(() => {
       $('#slides').carousel({
         interval: 3000,
-      });
+      }); 
+    }, 2000);
+
   }
 
  /* login(){
