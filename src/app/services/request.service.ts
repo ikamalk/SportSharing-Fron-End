@@ -18,4 +18,9 @@ export class RequestService {
    getRequestByAccountId(id:number):Promise<Request[]>{
     return this.http.get<Request[]>(`http://localhost:1212/request/${id}`).toPromise();
    }
+
+
+   deleteRequest(id:number){
+    return this.http.delete(`http://localhost:1212/request/${id}`).toPromise();
+   }
 }

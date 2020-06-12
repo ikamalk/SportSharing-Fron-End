@@ -31,11 +31,18 @@ export class MyRequestComponent implements OnInit {
     })
   }
 
+  deleteRequest(id:number){
+    this.requestService.deleteRequest(id).then(()=>{
+      this.getRequestById(this.account.id);
+
+    })
+  }
+
   openDialog() {
     const dialogRef = this.dialog.open(RequestDialog);
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
+      this.getRequestById(this.account.id);
     });
   }
 
