@@ -44,10 +44,14 @@
                 font-weight: 700;
                 user-select: none;
                 position: relative;
-                img{
-                    width: 50px;
-                    margin: auto;
-                    display: block;
+                div{
+                    div{
+                        img{
+                            width: 50px;
+                            margin: auto;
+                            display: block;
+                        }
+                    }
                 }
             }
             .type{
