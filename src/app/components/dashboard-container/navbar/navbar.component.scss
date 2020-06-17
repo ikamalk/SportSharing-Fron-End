@@ -35,7 +35,7 @@
             display: inline-block;
             .title{
                 font-size: 25px;
-                color: $font-color-black;
+                color: white;
                 font-weight: 600;
                 animation: tracking-in-expand 0.7s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
             }
@@ -62,7 +62,7 @@
                     display: inline-block;
                     user-select: none;
                     #full-name{
-                       color: $font-color-black;
+                       color: white;
                     }
                     #description{
                         color: $font-color-gray;
@@ -77,16 +77,13 @@
                 #logout{
                     margin-right: 30px;
                     font-size: 30px;
-                    background: -webkit-linear-gradient($primary-color, $primary-color-light-2);
-                    -webkit-background-clip: text;
-                    -webkit-text-fill-color: transparent;
+                    color: white;
                     cursor: pointer;
                 }
                 #logout:hover{
-                    background: -webkit-linear-gradient($primary-color-light-2, $primary-color-light-3);
-                    -webkit-background-clip: text;
-                    -webkit-text-fill-color: transparent;
+                    color: white;
                     cursor: pointer;
+
                 }
             }
 
