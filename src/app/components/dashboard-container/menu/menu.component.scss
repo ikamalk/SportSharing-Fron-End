@@ -1,8 +1,15 @@
 @import "../../../../styles.scss";
 #container{
     min-width: 275px;
-    background-color: $primary-color;
+    // background-color: rgba(46, 125, 50, 0.959);
+    // opacity: 0.95;
     height: calc(100vh - 90px);
+    img{
+      position: absolute;
+      bottom: 0;
+      z-index: -1;
+
+    }
 
     #list-container {
         padding: 20px 0px;
@@ -34,7 +41,7 @@
           font-weight: 700;
           position: relative;
           color: $primary-color;
-          background-color: #ffffff;
+          background-color: #ffffffcc;
           outline: 0;
           .indicator {
             position: absolute;

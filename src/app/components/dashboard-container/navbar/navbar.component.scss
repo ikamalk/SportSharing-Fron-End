@@ -1,18 +1,27 @@
 @import "../../../../styles.scss";
 #container{
-    height: 90px;
+    height: 100px;
     background-color: $primary-color;
     #logo{
         display: inline-block;
         vertical-align: middle;
         height: 90px;
-        top: -10px;
+        top: -15px;
         position: relative;
-        img{
-            width: calc(275px - 40px);
-            margin: 0 20px;
+
+        img:nth-child(1){
+            width: 150px;
+            margin: 0;
+            margin-left: 20px;
+            // margin-bottom: 10px;
             display: inline-block;
         }
+        img:nth-child(2){
+          width: 80px;
+          margin: 0;
+          // margin-bottom: 10px;
+          display: inline-block;
+      }
     }
     #content{
         padding: 10px;
