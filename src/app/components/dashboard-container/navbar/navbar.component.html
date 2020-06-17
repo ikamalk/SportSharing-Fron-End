@@ -1,6 +1,6 @@
 <div id="container" *ngIf="account">
     <div id="logo">
-        <img src="../../../../assets/pickup.png" alt="">
+        <img src="../../../../assets/pickupForGreenBackground.png" alt="">
     </div>
     <div id="content">
         <div id="title-container">
@@ -8,32 +8,32 @@
             <div [ngSwitch]="tab">
                 <div *ngSwitchCase="'board'">
                     <div class="title">
-                        My Dashboard
+                        Find Events
                     </div>
                     <div class="description">
-                        This is the description of the page
+                        Find local pick up games in your area!
                     </div>
                 </div>
                 <div *ngSwitchCase="'request'">
                     <div class="title">
-                        My Request
+                        My Events
                     </div>
                     <div class="description">
-                        This is the description of the request page
+                        Create an event or view the events you have signed up for!
                     </div>
                 </div>
                 <div *ngSwitchCase="'profile'">
                     <div class="title">
-                        My Profile
+                        Profile
                     </div>
                     <div class="description">
-                        This is the description of the profile page
+                        Edit your profile information!
                     </div>
                 </div>
                 <div *ngSwitchDefault>null</div>
             </div>
         </div>
-        
+
         <div id="profile-container">
             <div id="profile">
                <ngx-avatar name=" {{account['firstname']}} {{account['lastname']}}" class="image-profile"></ngx-avatar>

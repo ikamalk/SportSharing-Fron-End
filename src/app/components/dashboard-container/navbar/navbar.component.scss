@@ -1,7 +1,7 @@
 @import "../../../../styles.scss";
 #container{
     height: 90px;
-    background-color: rgb(255, 255, 255);
+    background-color: $primary-color;
     #logo{
         display: inline-block;
         vertical-align: middle;
@@ -47,7 +47,7 @@
                 .image-profile{
                     margin-right: 10px;
                     user-select: none;
-    
+
                 }
                 #full-name-container{
                     display: inline-block;
@@ -80,7 +80,7 @@
                     cursor: pointer;
                 }
             }
-          
+
         }
     }
 }
