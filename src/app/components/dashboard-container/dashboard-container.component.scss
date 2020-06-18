@@ -4,7 +4,10 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: white;
+   // background-color: white;
+    background-image: url("../../../assets/basketballCourt.png");
+    background-size: cover;
+    background-position: center;
     mat-sidenav{
         background-color: white;
         border: 0 !important;
