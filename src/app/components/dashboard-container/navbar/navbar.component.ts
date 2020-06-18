@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SharedService } from 'src/app/services/shared.service';
+import { AccountService } from 'src/app/services/account.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -9,8 +11,10 @@ import { SharedService } from 'src/app/services/shared.service';
 export class NavbarComponent implements OnInit {
   tab:String = "board";
   account:Account;
-  constructor(private sharedService:SharedService) {
-    this.account =JSON.parse(localStorage.getItem("account"));
+  constructor(private sharedService:SharedService,
+    private serviceAccount:AccountService,
+    private router:Router) {
+    this.account = JSON.parse(localStorage.getItem("account"));
     console.log(this.account);
     this.sharedService.getNewTab().subscribe((tab)=>{
       this.tab = tab;
@@ -20,6 +24,12 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void {
 
+  }
+
+  logout(){
+    console.log("anything YOOO");
+    this.serviceAccount.removeAccountSession();
+    this.router.navigate(['/']);
   }
 
 }

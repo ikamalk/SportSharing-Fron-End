@@ -16,7 +16,7 @@ export class AuthGuardService implements CanActivate {
 
 
    public isAuthenticatedFunc(): boolean {
-    JSON.parse(localStorage.getItem('user')) == null
+    JSON.parse(localStorage.getItem('account')) == null
       ? (this.isAuthenticated = false)
       : (this.isAuthenticated = true);
     return this.isAuthenticated;
@@ -25,7 +25,7 @@ export class AuthGuardService implements CanActivate {
   canActivate(): boolean {
     if (!this.isAuthenticatedFunc()) {
       console.log(this.isAuthenticated);
-      this.router.navigateByUrl('/login');
+      this.router.navigateByUrl('/');
       return false;
     }
     //this.router.navigateByUrl('/dashboard');

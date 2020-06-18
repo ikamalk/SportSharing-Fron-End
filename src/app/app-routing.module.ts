@@ -5,16 +5,18 @@ import { DashboardContainerComponent } from './components/dashboard-container/da
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { MyRequestComponent } from './components/my-request/my-request.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { AuthGuardService } from './services/auth-guard.service';
 
 
 const routes: Routes = [
   {
-    component:LoginComponent,
-    path:"",
+    component: LoginComponent,
+    path: '',
   },
   {
-    component:DashboardContainerComponent,
-    path:"dashboard",
+    component: DashboardContainerComponent,
+    canActivate: [AuthGuardService],
+    path: 'dashboard',
     children: [
       {
         path: 'board',
