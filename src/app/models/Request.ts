@@ -9,5 +9,5 @@ export interface Request {
     skill_level:number;
     time_schedule:string;
     address:string;
-    //participants:Participant[]
+    participants:Participant[]
   }

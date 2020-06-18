@@ -3,7 +3,7 @@
     <div class="txt">Please wait...</div>
 </div>
 <div id="list-container" [hidden]="!loading">
-    <div class="list" *ngFor="let request of requests">
+    <div class="list" *ngFor="let request of requests;let i = index">
         <div [ngSwitch]="request.sport_type">
             <div *ngSwitchCase="'Basketball'">
                 <img class="background-img" src="assets/Basketball.png" alt="">
@@ -73,7 +73,7 @@
               <div>Players</div>
             </div>
             <div class="item">
-                <div>{{request.player - request.participants.length}}</div>
+                <div>{{request.player}}</div>
                 <div>Missing</div>
             </div>
             <div class="item">
@@ -117,25 +117,27 @@
 
 
             <div class="position-btn-container">
-                <button mat-raised-button color="primary">See location</button>
+                <button mat-raised-button color="primary" (click)="seePosition(i)">See location</button>
             </div>
             <div class="accept-btn-container">
 
-                <button mat-raised-button color="primary" (click)="join(request)" [disabled]="account['id'] == request.account.id">Join</button>
-
+                <button mat-raised-button color="primary" *ngIf="!myParticipations.includes(request.id)" (click)="join(request)" [disabled]="account['id'] == request.account.id">Join</button>
+                <button mat-raised-button color="primary" *ngIf="myParticipations.includes(request.id)" disabled>You Joined !</button>
             </div>
 
         </div>
     </div>
 </div>
 <div id="maps-container"  [hidden]="!loading">
+    <button mat-raised-button color="primary" *ngIf="onEventFocus" (click)="getAllRequest()">
+        <i class="fa fa-map-marker"></i>
+         Show All events</button>
 
     <agm-map [latitude]="latitude"
     [longitude]="longitude"
     [zoom]="zoom"
     [styles]="style">
-    <agm-marker *ngFor="let marker of markers" [markerClickable]="true"
-    (markerClick)="test($event)" [latitude]="marker.lat" [longitude]="marker.lng" [markerDraggable]="false"
+    <agm-marker *ngFor="let marker of markers;let i = index" [latitude]="marker.lat" [longitude]="marker.lng" [markerDraggable]="false"
    [iconUrl]="{
     url: './assets/pins/'+marker.sport_type+'Pin.png',
     scaledSize: {

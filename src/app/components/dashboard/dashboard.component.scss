@@ -182,6 +182,16 @@
     height: 100%;
     width: 50%;
     display: inline-block;
+    button{
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        border-radius: 20px;
+        color: $primary-color;
+        z-index: 9999999999;
+        background-color: white;
+        font-size: 16px;
+    }
     agm-map {
        width: 100%;
        height: 100%;

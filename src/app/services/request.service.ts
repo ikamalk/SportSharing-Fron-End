@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Request } from '../models/Request';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +20,6 @@ export class RequestService {
     return this.http.get<Request[]>(`http://localhost:1212/request/${id}`).toPromise();
    }
 
-   
    updateRequest(request:Request){
     return this.http.post<Request>("http://localhost:1212/request/update",request).toPromise();
    }

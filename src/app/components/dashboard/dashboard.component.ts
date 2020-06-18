@@ -3,7 +3,10 @@ import { RequestService } from 'src/app/services/request.service';
 import { Account } from 'src/app/models/Account';
 import { MapsAPILoader } from '@agm/core';
 import { Marker } from 'src/app/models/Marker';
+import { Request } from 'src/app/models/Request';
+
 import { Participant } from 'src/app/models/Participant';
+import { ParticipantService } from 'src/app/services/participant.service';
 declare var google;
 
 @Component({
@@ -277,16 +280,29 @@ export class DashboardComponent implements OnInit {
   "assets/pins/SoccerPin.png","assets/pins/FrisbeePin.png","assets/pins/TennisPin.png"];
   imgLoader:string=this.pinslist[5];
   newParticipant:Participant;
-  Participants:Participant[];
+  myParticipations:number[] = [];
+  onEventFocus:boolean = false;
   constructor(private requestService:RequestService,private mapsAPILoader: MapsAPILoader,
-    private ngZone: NgZone) {
+    private ngZone: NgZone,private participantService:ParticipantService) {
     this.account = JSON.parse(localStorage.getItem("account"));
-    this.setCurrentLocation();
+
     this.getAllRequest();
   }
 
   ngOnInit(): void {
 
+  }
+
+
+  getMyParticipationsFunc(){
+    this.participantService.getParticipationByAccountId(this.account.id).then(myParticipations=>{
+      console.log(myParticipations);
+      myParticipations.forEach((participation=>{
+        
+       this.myParticipations.push(participation.request.id);
+      }));
+      console.log(this.myParticipations);
+    });
   }
 
   startpins(){
@@ -311,6 +327,7 @@ export class DashboardComponent implements OnInit {
   }
 
   generateMarker(){
+    this.markers =[];
     this.mapsAPILoader.load().then(() => {
       this.geocoder = new google.maps.Geocoder;
       this.requests.forEach(request => {
@@ -321,10 +338,16 @@ export class DashboardComponent implements OnInit {
   }
 
   getAllRequest(){
+    this.onEventFocus = false;
+    this.setCurrentLocation();
     this.requestService.getAllRequest().then(requests=>{
       this.requests = requests.reverse();
-      console.log(this.requests);
+     // console.log(this.requests);
       this.generateMarker();
+      this.getMyParticipationsFunc();
+      setTimeout(() => {
+        this.loading = true;
+      }, 2000);
       
     })
   }
@@ -345,40 +368,41 @@ export class DashboardComponent implements OnInit {
 
   }
 
-  test(event){
-    console.log(event);
-    
+  seePosition(index:number){
+    this.onEventFocus =true;
+    this.markers = [this.markers[index]];
+    this.latitude = this.markers[0].lat;
+    this.longitude = this.markers[0].lng;
+    this.zoom = 14;
+    this.requests = [this.requests[index]];
   }
 
   join(request:Request){
-  /*  console.log(request);
-    this.Participants = request.participants;
     this.newParticipant = {
-      accountId:request.id,
+      id:0,
+      request:request,
+      accountId:this.account.id,
       age:0,
-      name:request.account.firstname + " " + request.account.lastname,
-      phoneNumber:request.account.phoneNumber
+      name:this.account.firstname + " " + this.account.lastname,
+      phoneNumber:this.account.phoneNumber
     }
-    this.Participants.push(this.newParticipant);
-    request.participants = this.Participants;*/
-  
+    console.log(this.newParticipant);
+    this.participantService.addParticipant(this.newParticipant).then((resp)=>{
+      this.getAllRequest();
+    })
   }
 
 
   geocodeAddress(address:string,type_sport:string) {
     this.geocoder.geocode({'address': address}, (results, status) => {
           if (status === 'OK') {
-            console.log(results[0].geometry.location.lat()+" "+results[0].geometry.location.lng());
             let marker = {
               lat:results[0].geometry.location.lat(),
               lng:results[0].geometry.location.lng(),
               sport_type:type_sport
             };
             this.markers.push(marker);
-            console.log(this.markers);
-            setTimeout(() => {
-              this.loading = true;
-            }, 1500);
+
           } else {
             alert('Geocode was not successful for the following reason: ' + status);
           }
