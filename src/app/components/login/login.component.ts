@@ -84,7 +84,7 @@ export class LoginComponent implements OnInit {
      this.accountService.getAccountSession(this.loginForm.value.username);
         this.successLogin();
         setTimeout(() => {
-          this.router.navigate(["dashboard"]);
+          this.router.navigateByUrl("dashboard/(my:board)");
         }, 1000);
     }).catch(error=>{
 

@@ -3,6 +3,7 @@ import { RequestService } from 'src/app/services/request.service';
 import { Account } from 'src/app/models/Account';
 import { MapsAPILoader } from '@agm/core';
 import { Marker } from 'src/app/models/Marker';
+import { Participant } from 'src/app/models/Participant';
 declare var google;
 
 @Component({
@@ -270,7 +271,13 @@ export class DashboardComponent implements OnInit {
       ]
     }
   ];
-
+  loading:boolean = false;
+  startLoading:boolean = false;
+  pinslist:string[] = ["assets/pins/BaseballPin.png","assets/pins/BasketballPin.png","assets/pins/BowlingPin.png",
+  "assets/pins/SoccerPin.png","assets/pins/FrisbeePin.png","assets/pins/TennisPin.png"];
+  imgLoader:string=this.pinslist[5];
+  newParticipant:Participant;
+  Participants:Participant[];
   constructor(private requestService:RequestService,private mapsAPILoader: MapsAPILoader,
     private ngZone: NgZone) {
     this.account = JSON.parse(localStorage.getItem("account"));
@@ -280,6 +287,27 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
 
+  }
+
+  startpins(){
+    setTimeout(() => {
+      this.pinslist.forEach((pin,i)=>{
+        setTimeout(() => {
+          this.imgLoader = pin;
+          if(i == this.pinslist.length-1){
+            setTimeout(() => {
+              this.startpins();
+            }, 250);
+          }
+        }, 500*(i));
+      })
+    }, 250);
+  }
+
+  ngAfterViewInit(){
+    let i = 0;
+    this.startLoading =true;
+    this.startpins();
   }
 
   generateMarker(){
@@ -317,6 +345,25 @@ export class DashboardComponent implements OnInit {
 
   }
 
+  test(event){
+    console.log(event);
+    
+  }
+
+  join(request:Request){
+  /*  console.log(request);
+    this.Participants = request.participants;
+    this.newParticipant = {
+      accountId:request.id,
+      age:0,
+      name:request.account.firstname + " " + request.account.lastname,
+      phoneNumber:request.account.phoneNumber
+    }
+    this.Participants.push(this.newParticipant);
+    request.participants = this.Participants;*/
+  
+  }
+
 
   geocodeAddress(address:string,type_sport:string) {
     this.geocoder.geocode({'address': address}, (results, status) => {
@@ -329,6 +376,9 @@ export class DashboardComponent implements OnInit {
             };
             this.markers.push(marker);
             console.log(this.markers);
+            setTimeout(() => {
+              this.loading = true;
+            }, 1500);
           } else {
             alert('Geocode was not successful for the following reason: ' + status);
           }

@@ -19,6 +19,10 @@ export class RequestService {
     return this.http.get<Request[]>(`http://localhost:1212/request/${id}`).toPromise();
    }
 
+   
+   updateRequest(request:Request){
+    return this.http.post<Request>("http://localhost:1212/request/update",request).toPromise();
+   }
 
    deleteRequest(id:number){
     return this.http.delete(`http://localhost:1212/request/${id}`).toPromise();

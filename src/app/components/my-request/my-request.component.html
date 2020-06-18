@@ -1,10 +1,10 @@
 <div id="container">
     <div id="add">
-        <button mat-raised-button color="primary" class="float-right m-3" (click)="openDialog()"><i class="fa fa-plus" aria-hidden="true"></i>
+        <button mat-raised-button color="primary" class="float-right m-3" (click)="openDialog(null)"><i class="fa fa-plus" aria-hidden="true"></i>
           Create an event</button>
      </div>
      <div id="list-container">
-         <div class="list" *ngFor="let request of requests">
+         <div class="list" *ngFor="let request of requests;let i = index">
             <div [ngSwitch]="request['sport_type']">
                 <div *ngSwitchCase="'Basketball'">
                     <img class="background-img" src="assets/Basketball.png" alt="">
@@ -104,7 +104,7 @@
              <div class="participant">
                  <div class="txt m-3">Participants</div>
 
-                 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+                 <table mat-table [dataSource]="request.participants" class="mat-elevation-z8">
 
                      <!--- Note that these columns can be defined in any order.
                            The actual rendered columns are set as a property on the row definition" -->
@@ -145,7 +145,7 @@
                  </div>
                  <div class="accept-btn-container">
 
-                     <button mat-raised-button color="primary">Modify</button>
+                     <button mat-raised-button color="primary" (click)="openDialog(request)">Modify</button>
 
                  </div>
 

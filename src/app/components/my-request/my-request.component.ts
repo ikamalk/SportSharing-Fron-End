@@ -38,8 +38,11 @@ export class MyRequestComponent implements OnInit {
     })
   }
 
-  openDialog() {
-    const dialogRef = this.dialog.open(RequestDialog);
+  openDialog(data) {
+    const dialogRef = this.dialog.open(RequestDialog, {
+      width: '500px',
+      data: data
+    });
 
     dialogRef.afterClosed().subscribe(result => {
       this.getRequestById(this.account.id);
@@ -48,6 +51,7 @@ export class MyRequestComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
 
   stars(val) {
     const starPercentage = (val / 5) * 100;

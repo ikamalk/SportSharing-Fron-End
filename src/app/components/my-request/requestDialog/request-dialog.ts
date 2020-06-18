@@ -1,22 +1,29 @@
-import { Component, ViewChild, ElementRef, NgZone } from '@angular/core';
+import { Component, ViewChild, ElementRef, NgZone, Inject } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MapsAPILoader } from '@agm/core';
 import { RequestService } from 'src/app/services/request.service';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Request } from 'src/app/models/Request';
 declare var google;
 @Component({
     selector: 'request-dialog',
     templateUrl: 'request-dialog.html',
+    styleUrls: ['request-dialog.scss']
   })
   export class RequestDialog {
     requestForm: FormGroup;
     account:Account;
+    request:Request;
     @ViewChild('search') searchElementRef: ElementRef;
 
     constructor(private formBuilder:FormBuilder,private mapsAPILoader:MapsAPILoader,private ngZone:NgZone,
-        private requestService:RequestService,private matDialog: MatDialog){
+        private requestService:RequestService,private matDialog: MatDialog,@Inject(MAT_DIALOG_DATA) public requestData: Request){
             this.account = JSON.parse(localStorage.getItem("account"));
-        this.requestForm = this.formBuilder.group({
+            this.request = requestData;
+            console.log(this.request);
+            
+        if(this.request == null){
+          this.requestForm = this.formBuilder.group({
             id: [0],
             account: [this.account, Validators.required],
             sport_type: ["", Validators.required],
@@ -25,6 +32,18 @@ declare var google;
             time_schedule: ["", Validators.required],
             address: ["", Validators.required]
           });
+        } else {
+          this.requestForm = this.formBuilder.group({
+            id: [this.request.id],
+            account: [this.request.account, Validators.required],
+            sport_type: [this.request.sport_type, Validators.required],
+            player: [this.request.player, Validators.required],
+            skill_level: [this.request.skill_level, Validators.required],
+            time_schedule: [this.request.time_schedule, Validators.required],
+            address: [this.request.address, Validators.required]
+          });
+        }
+
     }
 
     sendRequest(){
@@ -34,6 +53,15 @@ declare var google;
            console.log(request);
            this.matDialog.closeAll();    
            });
+    }
+
+    updateRequest(){
+      console.log(this.requestForm.value);
+      this.requestForm.value.address = this.searchElementRef.nativeElement.value;
+      this.requestService.updateRequest(this.requestForm.value).then(request=>{
+          console.log(request);
+          this.matDialog.closeAll();    
+          });
     }
 
     ngAfterViewInit(){

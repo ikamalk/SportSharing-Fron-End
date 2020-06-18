@@ -1,4 +1,8 @@
-<div id="list-container">
+<div id="loader" [hidden]="loading">
+    <img [ngClass]="{slidecaption: startLoading}" [src]="imgLoader" alt="">
+    <div class="txt">Please wait...</div>
+</div>
+<div id="list-container" [hidden]="!loading">
     <div class="list" *ngFor="let request of requests">
         <div [ngSwitch]="request.sport_type">
             <div *ngSwitchCase="'Basketball'">
@@ -117,20 +121,21 @@
             </div>
             <div class="accept-btn-container">
 
-                <button mat-raised-button color="primary" [disabled]="account['id'] = request.account.id">Join</button>
+                <button mat-raised-button color="primary" (click)="join(request)" [disabled]="account['id'] == request.account.id">Join</button>
 
             </div>
 
         </div>
     </div>
 </div>
-<div id="maps-container">
+<div id="maps-container"  [hidden]="!loading">
 
     <agm-map [latitude]="latitude"
     [longitude]="longitude"
     [zoom]="zoom"
     [styles]="style">
-    <agm-marker *ngFor="let marker of markers" [latitude]="marker.lat" [longitude]="marker.lng" [markerDraggable]="false"
+    <agm-marker *ngFor="let marker of markers" [markerClickable]="true"
+    (markerClick)="test($event)" [latitude]="marker.lat" [longitude]="marker.lng" [markerDraggable]="false"
    [iconUrl]="{
     url: './assets/pins/'+marker.sport_type+'Pin.png',
     scaledSize: {
