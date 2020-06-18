@@ -28,31 +28,7 @@ export class DashboardComponent implements OnInit {
       "elementType": "geometry",
       "stylers": [
         {
-          "color": "#c1ffb8"
-        }
-      ]
-    },
-    {
-      "elementType": "geometry.fill",
-      "stylers": [
-        {
-          "color": "#c1ffb8"
-        }
-      ]
-    },
-    {
-      "elementType": "labels",
-      "stylers": [
-        {
-          "color": "#b82e2e"
-        }
-      ]
-    },
-    {
-      "elementType": "labels.icon",
-      "stylers": [
-        {
-          "visibility": "off"
+          "color": "#EBE3CD"
         }
       ]
     },
@@ -60,7 +36,7 @@ export class DashboardComponent implements OnInit {
       "elementType": "labels.text.fill",
       "stylers": [
         {
-          "color": "#007004"
+          "color": "#523735"
         }
       ]
     },
@@ -68,7 +44,25 @@ export class DashboardComponent implements OnInit {
       "elementType": "labels.text.stroke",
       "stylers": [
         {
-          "color": "#f5f5f5"
+          "color": "#F5F1E6"
+        }
+      ]
+    },
+    {
+      "featureType": "administrative",
+      "elementType": "geometry.stroke",
+      "stylers": [
+        {
+          "color": "#C9B2A6"
+        }
+      ]
+    },
+    {
+      "featureType": "administrative.land_parcel",
+      "elementType": "geometry.stroke",
+      "stylers": [
+        {
+          "color": "#DCD2BE"
         }
       ]
     },
@@ -77,16 +71,25 @@ export class DashboardComponent implements OnInit {
       "elementType": "labels.text.fill",
       "stylers": [
         {
-          "color": "#bdbdbd"
+          "color": "#AE9E90"
+        }
+      ]
+    },
+    {
+      "featureType": "landscape.man_made",
+      "elementType": "geometry.fill",
+      "stylers": [
+        {
+          "color": "#B8AEA3"
         }
       ]
     },
     {
       "featureType": "landscape.natural",
-      "elementType": "geometry.fill",
+      "elementType": "geometry",
       "stylers": [
         {
-          "color": "#99ff8a"
+          "color": "#A9C763"
         }
       ]
     },
@@ -95,7 +98,7 @@ export class DashboardComponent implements OnInit {
       "elementType": "geometry",
       "stylers": [
         {
-          "color": "#eeeeee"
+          "color": "#DFD2AE"
         }
       ]
     },
@@ -104,16 +107,16 @@ export class DashboardComponent implements OnInit {
       "elementType": "labels.text.fill",
       "stylers": [
         {
-          "color": "#757575"
+          "color": "#93817C"
         }
       ]
     },
     {
-      "featureType": "poi.park",
-      "elementType": "geometry",
+      "featureType": "poi.medical",
+      "elementType": "geometry.fill",
       "stylers": [
         {
-          "color": "#e5e5e5"
+          "color": "#F96053"
         }
       ]
     },
@@ -122,7 +125,7 @@ export class DashboardComponent implements OnInit {
       "elementType": "geometry.fill",
       "stylers": [
         {
-          "color": "#75ff8c"
+          "color": "#18BC10"
         }
       ]
     },
@@ -131,16 +134,25 @@ export class DashboardComponent implements OnInit {
       "elementType": "labels.text.fill",
       "stylers": [
         {
-          "color": "#420000"
+          "color": "#447530"
+        }
+      ]
+    },
+    {
+      "featureType": "poi.school",
+      "elementType": "geometry.fill",
+      "stylers": [
+        {
+          "color": "#31F4EF"
         }
       ]
     },
     {
       "featureType": "poi.sports_complex",
-      "elementType": "labels.text",
+      "elementType": "geometry.fill",
       "stylers": [
         {
-          "color": "#700000"
+          "color": "#FFEB3B"
         }
       ]
     },
@@ -149,16 +161,16 @@ export class DashboardComponent implements OnInit {
       "elementType": "geometry",
       "stylers": [
         {
-          "color": "#ffffff"
+          "color": "#D9D3D2"
         }
       ]
     },
     {
       "featureType": "road.arterial",
-      "elementType": "labels.text.fill",
+      "elementType": "geometry",
       "stylers": [
         {
-          "color": "#757575"
+          "color": "#E9E8E2"
         }
       ]
     },
@@ -167,16 +179,34 @@ export class DashboardComponent implements OnInit {
       "elementType": "geometry",
       "stylers": [
         {
-          "color": "#dadada"
+          "color": "#F8C967"
         }
       ]
     },
     {
       "featureType": "road.highway",
-      "elementType": "labels.text.fill",
+      "elementType": "geometry.stroke",
       "stylers": [
         {
-          "color": "#616161"
+          "color": "#E9BC62"
+        }
+      ]
+    },
+    {
+      "featureType": "road.highway.controlled_access",
+      "elementType": "geometry",
+      "stylers": [
+        {
+          "color": "#E98D58"
+        }
+      ]
+    },
+    {
+      "featureType": "road.highway.controlled_access",
+      "elementType": "geometry.stroke",
+      "stylers": [
+        {
+          "color": "#DB8555"
         }
       ]
     },
@@ -185,7 +215,7 @@ export class DashboardComponent implements OnInit {
       "elementType": "labels.text.fill",
       "stylers": [
         {
-          "color": "#9e9e9e"
+          "color": "#806B63"
         }
       ]
     },
@@ -194,7 +224,25 @@ export class DashboardComponent implements OnInit {
       "elementType": "geometry",
       "stylers": [
         {
-          "color": "#e5e5e5"
+          "color": "#DFD2AE"
+        }
+      ]
+    },
+    {
+      "featureType": "transit.line",
+      "elementType": "labels.text.fill",
+      "stylers": [
+        {
+          "color": "#8F7D77"
+        }
+      ]
+    },
+    {
+      "featureType": "transit.line",
+      "elementType": "labels.text.stroke",
+      "stylers": [
+        {
+          "color": "#EBE3CD"
         }
       ]
     },
@@ -203,24 +251,7 @@ export class DashboardComponent implements OnInit {
       "elementType": "geometry",
       "stylers": [
         {
-          "color": "#eeeeee"
-        }
-      ]
-    },
-    {
-      "featureType": "water",
-      "stylers": [
-        {
-          "color": "#31b51c"
-        }
-      ]
-    },
-    {
-      "featureType": "water",
-      "elementType": "geometry",
-      "stylers": [
-        {
-          "color": "#c9c9c9"
+          "color": "#DFD2AE"
         }
       ]
     },
@@ -229,7 +260,7 @@ export class DashboardComponent implements OnInit {
       "elementType": "geometry.fill",
       "stylers": [
         {
-          "color": "#90b6b4"
+          "color": "#798DFD"
         }
       ]
     },
@@ -238,7 +269,7 @@ export class DashboardComponent implements OnInit {
       "elementType": "labels.text.fill",
       "stylers": [
         {
-          "color": "#9e9e9e"
+          "color": "#92998D"
         }
       ]
     }
@@ -267,7 +298,7 @@ export class DashboardComponent implements OnInit {
     this.participantService.getParticipationByAccountId(this.account.id).then(myParticipations=>{
       console.log(myParticipations);
       myParticipations.forEach((participation=>{
-        
+
        this.myParticipations.push(participation.request.id);
       }));
       console.log(this.myParticipations);
@@ -304,9 +335,9 @@ export class DashboardComponent implements OnInit {
           this.geocodeAddress(request['address'],request['sport_type']);
         }, 100*i);
         console.log("look");
-        
+
         console.log(request);
-        
+
       });
       console.log(this.markers);
       console.log(this.requests);
