@@ -137,7 +137,7 @@
     [longitude]="longitude"
     [zoom]="zoom"
     [styles]="style">
-    <agm-marker *ngFor="let marker of markers;let i = index" [latitude]="marker.lat" [longitude]="marker.lng" [markerDraggable]="false"
+    <agm-marker *ngFor="let marker of markers;let i = index" (markerClick)="seePosition(i)" [latitude]="marker.lat" [longitude]="marker.lng" [markerDraggable]="false"
    [iconUrl]="{
     url: './assets/pins/'+marker.sport_type+'Pin.png',
     scaledSize: {
