@@ -1,13 +1,13 @@
 @import "../../../../styles.scss";
 #container{
     min-width: 275px;
-    // background-color: rgba(46, 125, 50, 0.959);
+    background-color: rgba(46, 125, 50);
     // opacity: 0.95;
     height: calc(100vh - 90px);
+
     img{
       position: absolute;
       bottom: 0;
-      z-index: -1;
     }
 
     #list-container {
@@ -22,6 +22,7 @@
           padding: 20px 10px ;
           outline: 0;
           cursor: pointer;
+          position: relative;
           i {
             font-size: 22px;
             margin: 10px 20px 10px 20px;
