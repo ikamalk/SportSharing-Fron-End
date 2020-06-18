@@ -330,25 +330,32 @@ export class DashboardComponent implements OnInit {
     this.markers =[];
     this.mapsAPILoader.load().then(() => {
       this.geocoder = new google.maps.Geocoder;
-      this.requests.forEach(request => {
-        this.geocodeAddress(request['address'],request['sport_type']);
+      this.requests.forEach((request,i) => {
+        setTimeout(() => {
+          this.geocodeAddress(request['address'],request['sport_type']);
+        }, 100*i);
+        console.log("look");
+        
+        console.log(request);
+        
       });
-   });
+      console.log(this.markers);
+      console.log(this.requests);
 
+   });
   }
 
   getAllRequest(){
     this.onEventFocus = false;
     this.setCurrentLocation();
     this.requestService.getAllRequest().then(requests=>{
-      this.requests = requests.reverse();
+      this.requests = requests;
      // console.log(this.requests);
       this.generateMarker();
       this.getMyParticipationsFunc();
       setTimeout(() => {
         this.loading = true;
       }, 2000);
-      
     })
   }
 
