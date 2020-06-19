@@ -281,7 +281,9 @@ export class DashboardComponent implements OnInit {
   "assets/pins/SoccerPin.png","assets/pins/FrisbeePin.png","assets/pins/TennisPin.png"];
   imgLoader:string=this.pinslist[5];
   newParticipant:Participant;
-  myParticipations:number[] = [];
+  myParticipations:number[] = []; //list of id of request that the user joined
+  numberOfParticipations:number[] = []; //how much participation each request
+
   onEventFocus:boolean = false;
   constructor(private requestService:RequestService,private mapsAPILoader: MapsAPILoader,
     private ngZone: NgZone,private participantService:ParticipantService) {
@@ -299,7 +301,6 @@ export class DashboardComponent implements OnInit {
     this.participantService.getParticipationByAccountId(this.account.id).then(myParticipations=>{
       console.log(myParticipations);
       myParticipations.forEach((participation=>{
-
        this.myParticipations.push(participation.request.id);
       }));
       console.log(this.myParticipations);

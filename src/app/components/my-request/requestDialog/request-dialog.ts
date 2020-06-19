@@ -28,6 +28,7 @@ declare var google;
             account: [this.account, Validators.required],
             sport_type: ["", Validators.required],
             player: ["", Validators.required],
+            player_miss: ["", Validators.required],
             skill_level: ["", Validators.required],
             time_schedule: ["", Validators.required],
             address: ["", Validators.required]
@@ -38,6 +39,7 @@ declare var google;
             account: [this.request.account, Validators.required],
             sport_type: [this.request.sport_type, Validators.required],
             player: [this.request.player, Validators.required],
+            player_miss: [this.request.player, Validators.required],
             skill_level: [this.request.skill_level, Validators.required],
             time_schedule: [this.request.time_schedule, Validators.required],
             address: [this.request.address, Validators.required]
@@ -48,15 +50,17 @@ declare var google;
 
     sendRequest(){
         console.log(this.searchElementRef.nativeElement.value);
+        this.requestForm.value.player_miss = this.requestForm.value.player;
         this.requestForm.value.address = this.searchElementRef.nativeElement.value;
+        console.log(this.requestForm.value);
        this.requestService.addRequest(this.requestForm.value).then(request=>{
-           console.log(request);
            this.matDialog.closeAll();    
            });
     }
 
     updateRequest(){
       console.log(this.requestForm.value);
+      this.requestForm.value.player_miss = this.requestForm.value.player;
       this.requestForm.value.address = this.searchElementRef.nativeElement.value;
       this.requestService.updateRequest(this.requestForm.value).then(request=>{
           console.log(request);

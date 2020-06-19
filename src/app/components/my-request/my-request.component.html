@@ -1,4 +1,9 @@
-<div id="container">
+<div class="loader" [hidden]="loading">
+    <img [ngClass]="{slidecaption: startLoading}" [src]="imgLoader" alt="">
+    <div class="txt">Please wait...</div>
+</div>
+
+<div id="container" [hidden]="!loading">
     <div id="add">
         <button mat-raised-button color="primary" class="float-right m-3" (click)="openDialog(null)"><i class="fa fa-plus" aria-hidden="true"></i>
           Create an event</button>
@@ -74,7 +79,7 @@
                    <div>Players</div>
                  </div>
                  <div class="item">
-                     <div>{{request.player}}</div>
+                     <div>{{request.player_miss}}</div>
                      <div>Missing</div>
                  </div>
                  <div class="item">

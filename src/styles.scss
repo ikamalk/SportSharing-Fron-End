@@ -139,3 +139,45 @@ $font-color-gray:#c7c7c7;
       }
     }
   }
+
+
+  .loader{
+    padding-top: 100px;
+    text-align: center;
+    .slidecaption {
+        -webkit-animation-name: spinner; 
+       -webkit-animation-timing-function: linear; 
+       -webkit-animation-iteration-count: infinite; 
+       -webkit-animation-duration: 1s; 
+       animation-name: spinner; 
+       animation-timing-function: linear; 
+       animation-iteration-count: infinite; 
+       animation-duration: 1s; 
+       -webkit-transform-style: preserve-3d; 
+       -moz-transform-style: preserve-3d; 
+       -ms-transform-style: preserve-3d; 
+       transform-style: preserve-3d;
+       width: 150px;
+       display: inline-block;
+       margin: auto;
+    }
+    .txt{
+        font-size: 30px;
+        color: $font-color-black;
+    }
+}
+
+@keyframes spinner { 
+  from { 
+      -moz-transform: rotateY(0deg); 
+      -ms-transform: rotateY(0deg); 
+      transform: rotateY(0deg); 
+  } 
+  to 
+  { 
+      -moz-transform: rotateY(-360deg); 
+      -ms-transform: rotateY(-360deg); 
+      transform: rotateY(-360deg); 
+  
+  } 
+}

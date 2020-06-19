@@ -1,4 +1,4 @@
-<div id="loader" [hidden]="loading">
+<div class="loader" [hidden]="loading">
     <img [ngClass]="{slidecaption: startLoading}" [src]="imgLoader" alt="">
     <div class="txt">Please wait...</div>
 </div>
@@ -73,7 +73,7 @@
               <div>Players</div>
             </div>
             <div class="item">
-                <div>{{request.player}}</div>
+                <div>{{request.player_miss}}</div>
                 <div>Missing</div>
             </div>
             <div class="item">
@@ -136,6 +136,7 @@
     <agm-map [latitude]="latitude"
     [longitude]="longitude"
     [zoom]="zoom"
+    [streetViewControl]="false"
     [styles]="style">
     <agm-marker *ngFor="let marker of markers;let i = index" (markerClick)="seePosition(i)" [latitude]="marker.lat" [longitude]="marker.lng" [markerDraggable]="false"
    [iconUrl]="{

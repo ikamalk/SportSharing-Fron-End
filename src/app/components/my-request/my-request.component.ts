@@ -17,17 +17,39 @@ export class MyRequestComponent implements OnInit {
   private geocoder: any;
   account:Account;
   requests:Request[];
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
+  displayedColumns: string[] = ['number', 'name', 'age', 'contact'];
   participants:any[] =[];
-  dataSource = [
-    {position: 1, name: 'test 1', weight: 22, symbol: '-'},
-    {position: 2, name: 'test 2', weight: 29, symbol: '-'},
-    {position: 3, name: 'test 3', weight: 26, symbol: '-'},
-  ];
+  loading:boolean = false;
+  startLoading:boolean = false;
+  pinslist:string[] = ["assets/pins/BaseballPin.png","assets/pins/BasketballPin.png","assets/pins/BowlingPin.png",
+  "assets/pins/SoccerPin.png","assets/pins/FrisbeePin.png","assets/pins/TennisPin.png"];
+  imgLoader:string=this.pinslist[5];
   constructor(public dialog: MatDialog,private requestService:RequestService,
     private mapsAPILoader: MapsAPILoader,private participantService:ParticipantService) {
     this.account = JSON.parse(localStorage.getItem("account"));
     this.getRequestById(this.account.id);
+  }
+
+  ngAfterViewInit(){
+    let i = 0;
+    this.startLoading =true;
+    this.startpins();
+  }
+
+
+  startpins(){
+    setTimeout(() => {
+      this.pinslist.forEach((pin,i)=>{
+        setTimeout(() => {
+          this.imgLoader = pin;
+          if(i == this.pinslist.length-1){
+            setTimeout(() => {
+              this.startpins();
+            }, 250);
+          }
+        }, 500*(i));
+      })
+    }, 250);
   }
 
   getRequestById(id:number){
@@ -37,6 +59,9 @@ export class MyRequestComponent implements OnInit {
       requests.forEach(request=>{
         this.participantService.getParticipationByRequestId(request.id).then(participant=>{
           this.participants.push(participant);
+          setTimeout(() => {
+            this.loading = true;
+          }, 1000);
         })
       });
       console.log(this.participants);
