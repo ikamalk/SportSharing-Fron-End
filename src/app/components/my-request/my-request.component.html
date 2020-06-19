@@ -118,7 +118,7 @@
                            The actual rendered columns are set as a property on the row definition" -->
 
                      <!-- Position Column -->
-                     <ng-container matColumnDef="position">
+                     <ng-container matColumnDef="number">
                        <th mat-header-cell *matHeaderCellDef> No. </th>
                        <td mat-cell *matCellDef="let element"> 1 </td>
                      </ng-container>
@@ -130,13 +130,13 @@
                      </ng-container>
 
                      <!-- Weight Column -->
-                     <ng-container matColumnDef="weight">
+                     <ng-container matColumnDef="age">
                        <th mat-header-cell *matHeaderCellDef> Age </th>
                        <td mat-cell *matCellDef="let element"> {{element.age}} </td>
                      </ng-container>
 
                      <!-- Symbol Column -->
-                     <ng-container matColumnDef="symbol">
+                     <ng-container matColumnDef="contact">
                        <th mat-header-cell *matHeaderCellDef> Contact </th>
                        <td mat-cell *matCellDef="let element"> <button mat-raised-button>{{element.phoneNumber}}</button> </td>
                      </ng-container>

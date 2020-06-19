@@ -59,11 +59,12 @@ export class MyRequestComponent implements OnInit {
       requests.forEach(request=>{
         this.participantService.getParticipationByRequestId(request.id).then(participant=>{
           this.participants.push(participant);
-          setTimeout(() => {
-            this.loading = true;
-          }, 1000);
+ 
         })
       });
+      setTimeout(() => {
+        this.loading = true;
+      }, 1000);
       console.log(this.participants);
     })
   }
