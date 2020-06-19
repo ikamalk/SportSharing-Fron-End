@@ -41,6 +41,7 @@ export class LoginComponent implements OnInit {
       password: ["", Validators.required],
       firstname: ["", Validators.required],
       lastname: ["", Validators.required],
+      birthday: ["", Validators.required],
       phoneNumber: [
         "",
         Validators.pattern(/^(\([0-9]{3}\) |[0-9]{3}-)[0-9]{3}-[0-9]{4}$/),

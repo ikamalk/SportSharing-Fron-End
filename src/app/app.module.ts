@@ -22,6 +22,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatTableModule} from '@angular/material/table';
 import {MatDialogModule} from '@angular/material/dialog';
+import {MatDatepickerModule} from '@angular/material/datepicker';
 
 import { DashboardContainerComponent } from './components/dashboard-container/dashboard-container.component';
 import { MenuComponent } from './components/dashboard-container/menu/menu.component';
@@ -33,6 +34,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { MyRequestComponent } from './components/my-request/my-request.component';
 import { RequestDialog } from './components/my-request/requestDialog/request-dialog';
+import { MatNativeDateModule } from '@angular/material/core';
 export function tokenGetter() {
   console.log("token !!!");
   return localStorage.getItem("token");
@@ -69,8 +71,10 @@ export function tokenGetter() {
     MatButtonModule,
     MatSidenavModule,
     MatToolbarModule,
+    MatNativeDateModule,
     MatSelectModule,
     AvatarModule,
+    MatDatepickerModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyAJnZ3a5krUFvldtEnnNE6RUYRKD1-AISo',
       libraries: ["places"]

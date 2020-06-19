@@ -1,0 +1,17 @@
+#container{
+    background-color: rgba(255, 255, 255, 0.3);
+    padding: 10px;
+    border-radius: 20px;
+    
+    form{
+        mat-form-field {
+            padding: 5px 60px;
+        }
+        button {
+            display: block;
+            margin: auto;
+            border-radius: 20px;
+        }
+    }
+
+}

@@ -4,6 +4,7 @@ import { Account } from 'src/app/models/Account';
 import { MapsAPILoader } from '@agm/core';
 import { Marker } from 'src/app/models/Marker';
 import { Request } from 'src/app/models/Request';
+import * as moment from 'moment';
 
 import { Participant } from 'src/app/models/Participant';
 import { ParticipantService } from 'src/app/services/participant.service';
@@ -358,7 +359,7 @@ export class DashboardComponent implements OnInit {
       id:0,
       request:request,
       accountId:this.account.id,
-      age:0,
+      age:moment().diff(this.account.birthday.split('T')[0], 'years',false),
       name:this.account.firstname + " " + this.account.lastname,
       phoneNumber:this.account.phoneNumber
     }

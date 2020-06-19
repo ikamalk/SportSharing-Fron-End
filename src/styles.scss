@@ -121,3 +121,21 @@ $font-color-gray:#c7c7c7;
       }
     }
   }
+
+  .profile-image{
+    .avatar-container{
+      margin: auto;
+      width: 180px !important;
+      height: 180px !important;
+      .avatar-content{
+        height: 100%;
+        text-align: center;
+        border-radius: 100%;
+        text-transform: uppercase;
+        color: rgb(255, 255, 255);
+        font: 60px / 180px Helvetica, Arial, sans-serif !important;
+        user-select: none;
+        line-height: 180px !important;
+      }
+    }
+  }

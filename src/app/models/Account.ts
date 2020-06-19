@@ -7,4 +7,5 @@ export interface Account {
     phoneNumber:string;
     city:string;
     state:string;
+    birthday:string;
   }
