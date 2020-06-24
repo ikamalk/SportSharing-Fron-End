@@ -35,7 +35,9 @@
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",
-              "node_modules/bootstrap/dist/js/bootstrap.min.js"
+              "node_modules/bootstrap/dist/js/bootstrap.min.js",
+              "node_modules/cleave.js/dist/cleave.min.js",
+              "node_modules/cleave.js/dist/addons/cleave-phone.us.js"
             ]
           },
           "configurations": {

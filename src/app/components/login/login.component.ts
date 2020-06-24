@@ -4,6 +4,7 @@ import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AccountService } from 'src/app/services/account.service';
 declare var $;
+declare var Cleave;
 
 @Component({
   selector: 'app-login',
@@ -27,6 +28,7 @@ export class LoginComponent implements OnInit {
 
   constructor(private service:ServiceService,public formBuilder: FormBuilder,private router:Router,
     private accountService:AccountService, private changeDetector : ChangeDetectorRef) {
+      this.checkSession();
     this.loginForm = this.formBuilder.group({
       username: ['', Validators.required],
       password: ['', Validators.required],
@@ -51,13 +53,20 @@ export class LoginComponent implements OnInit {
     });
   }
 
+  checkSession(){
+    let account = JSON.parse(localStorage.getItem("account"));
+    if(account) {
+      this.accountService.getAccountSession(account.username);
+      this.router.navigateByUrl("dashboard/(my:board)");
+    }
+  }
+
   ngOnInit(): void {
     setTimeout(() => {
       $('#slides').carousel({
         interval: 3000,
       }); 
     }, 2100);
-
   }
 
  /* login(){
@@ -117,6 +126,15 @@ export class LoginComponent implements OnInit {
 
   toggle() {
     this.isLogin = !this.isLogin;
+    if (!this.isLogin) {
+      setTimeout(() => {
+        new Cleave('#phone', {
+          phone: true,
+          phoneRegionCode: 'us',
+          delimiter: '-',
+        });
+      }, 1000);
+    }
   }
 
 
