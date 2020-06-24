@@ -78,21 +78,27 @@ export class LoginComponent implements OnInit {
   }*/
 
   login(){
-    this.service.login(this.loginForm.value.username,this.loginForm.value.password).then((resp)=>{
-      console.log(resp);
-      localStorage.setItem("token",resp["jwt"]);
-     console.log(localStorage.getItem("token"));
-     this.accountService.getAccountSession(this.loginForm.value.username);
-        this.successLogin();
-        setTimeout(() => {
-          this.router.navigateByUrl("dashboard/(my:board)");
-        }, 1000);
-    }).catch(error=>{
+    if(this.loginForm.valid){
+      this.service.login(this.loginForm.value.username,this.loginForm.value.password).then((resp)=>{
+        console.log(resp);
+        localStorage.setItem("token",resp["jwt"]);
+       console.log(localStorage.getItem("token"));
+       this.accountService.getAccountSession(this.loginForm.value.username);
+          this.successLogin();
+          setTimeout(() => {
+            this.router.navigateByUrl("dashboard/(my:board)");
+          }, 1000);
+      }).catch(error=>{
+        console.log(error);
+        this.failureLogin();
+      });
+    }
 
-    });
   }
 
   register(){
+    if(this.registerForm.valid){
+
     this.accountService.addAccount(this.registerForm.value).then((res)=>{
       console.log(
         'ok'
@@ -105,6 +111,7 @@ export class LoginComponent implements OnInit {
         error
       );
     })
+  }
   }
 
 

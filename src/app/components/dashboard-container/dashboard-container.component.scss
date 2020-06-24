@@ -23,3 +23,13 @@
     right: 0;
     background-color: white;
   }
+
+
+
+/*********************************************************************************************/
+
+  @media screen and (max-width: 992px) {
+ .header {
+    display: none;
+  }
+}

@@ -35,6 +35,10 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { MyRequestComponent } from './components/my-request/my-request.component';
 import { RequestDialog } from './components/my-request/requestDialog/request-dialog';
 import { MatNativeDateModule } from '@angular/material/core';
+
+let UrlForJwt = environment.urlForJWT;
+let url = environment.url;
+
 export function tokenGetter() {
   console.log("token !!!");
   return localStorage.getItem("token");
@@ -82,8 +86,8 @@ export function tokenGetter() {
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
-        whitelistedDomains: ["localhost:1212"],
-        blacklistedRoutes: ["http://localhost:1212/register","http://localhost:1212/authenticate"],
+        whitelistedDomains: [UrlForJwt],
+        blacklistedRoutes: [url+"register",url+"authenticate"],
       },
     }),
     BrowserAnimationsModule
