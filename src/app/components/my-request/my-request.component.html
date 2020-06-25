@@ -5,8 +5,8 @@
 
 <div id="container" [hidden]="!loading">
     <div id="add">
-        <button mat-raised-button color="primary" class="float-right m-3" (click)="openDialog(null)"><i class="fa fa-plus" aria-hidden="true"></i>
-          Create an event</button>
+        <button mat-raised-button color="primary" class="float-left m-1" (click)="openDialog(null)"><i class="fa fa-plus" aria-hidden="true"></i>
+          </button>
      </div>
      <div id="list-container">
          <div class="list" *ngFor="let request of requests;let i = index">
