@@ -2,7 +2,7 @@
     <img [ngClass]="{slidecaption: startLoading}" [src]="imgLoader" alt="">
     <div class="txt">Please wait...</div>
 </div>
-<div id="list-container" [hidden]="!loading">
+<div id="list-container" [hidden]="!loading" [ngStyle]="{'overflow':isNoRequest ? 'hidden' : 'auto' }">
     <ng-container *ngFor="let request of requests;let i = index">
         <div class="list" *ngIf="request.isShown">
             <div [ngSwitch]="request.sport_type">
@@ -130,8 +130,8 @@
         </div>
 
     </ng-container>
-    <div *ngIf="requests.length == 0">
-        There is no event in your area!
+    <div *ngIf="isNoRequest">
+        <img style="width:100%" src="assets/playByYourself.png" alt="">
     </div>
 
 </div>
@@ -168,7 +168,7 @@
         
      </agm-marker>
     </ng-container>
-    <agm-circle [latitude]="latitude" [longitude]="longitude" [radius]="radius" [fillColor]="'yellow'"
+   <agm-circle [latitude]="latitude" [longitude]="longitude" [radius]="radius" [fillColor]="'yellow'"
         [circleDraggable]="false" [editable]="false" 
         (radiusChange)="showHideMarkers()">
     </agm-circle>

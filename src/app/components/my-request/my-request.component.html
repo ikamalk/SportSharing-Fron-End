@@ -8,156 +8,163 @@
         <button mat-raised-button color="primary" class="float-left m-1" (click)="openDialog(null)"><i class="fa fa-plus" aria-hidden="true"></i>
           </button>
      </div>
-     <div id="list-container">
-         <div class="list" *ngFor="let request of requests;let i = index">
-            <div [ngSwitch]="request['sport_type']">
-                <div *ngSwitchCase="'Basketball'">
-                    <img class="background-img" src="assets/Basketball.png" alt="">
-                </div>
-                <div *ngSwitchCase="'Soccer'">
-                    <img class="background-img" src="assets/Soccer.png" alt="">
-                </div>
-                <div *ngSwitchCase="'Baseball'">
-                    <img class="background-img" src="assets/Baseball.png" alt="">
-                </div>
-                <div *ngSwitchCase="'Frisbee'">
-                    <img class="background-img" src="assets/Frisbee.png" alt="">
-                </div>
-                <div *ngSwitchCase="'Football'">
-                    <img class="background-img" src="assets/Football.png" alt="">
-                </div>
-                <div *ngSwitchCase="'Lacrosse'">
-                    <img class="background-img" src="assets/Lacrosse.png" alt="">
-                </div>
-                <div *ngSwitchCase="'Bowling'">
-                    <img class="background-img" src="assets/Bowling.png" alt="">
-                </div>
-                <div *ngSwitchCase="'Golf'">
-                    <img class="background-img" src="assets/Golf.png" alt="">
-                </div>
-                <div *ngSwitchCase="'Volleyball'">
-                    <img class="background-img" src="assets/Volleyball.png" alt="">
-                </div>
-                <div *ngSwitchDefault></div>
-            </div>
-             <div class="title">
+    <div *ngIf="requests.length != 0">
+
+         <div id="list-container">
+             <div class="list" *ngFor="let request of requests;let i = index">
                 <div [ngSwitch]="request['sport_type']">
                     <div *ngSwitchCase="'Basketball'">
-                        <img src="assets/Basketball.png" alt="">
+                        <img class="background-img" src="assets/Basketball.png" alt="">
                     </div>
                     <div *ngSwitchCase="'Soccer'">
-                        <img src="assets/Soccer.png" alt="">
+                        <img class="background-img" src="assets/Soccer.png" alt="">
                     </div>
                     <div *ngSwitchCase="'Baseball'">
-                        <img src="assets/Baseball.png" alt="">
+                        <img class="background-img" src="assets/Baseball.png" alt="">
                     </div>
                     <div *ngSwitchCase="'Frisbee'">
-                        <img src="assets/Frisbee.png" alt="">
+                        <img class="background-img" src="assets/Frisbee.png" alt="">
                     </div>
                     <div *ngSwitchCase="'Football'">
-                        <img src="assets/Football.png" alt="">
+                        <img class="background-img" src="assets/Football.png" alt="">
                     </div>
                     <div *ngSwitchCase="'Lacrosse'">
-                        <img src="assets/Lacrosse.png" alt="">
+                        <img class="background-img" src="assets/Lacrosse.png" alt="">
                     </div>
                     <div *ngSwitchCase="'Bowling'">
-                        <img src="assets/Bowling.png" alt="">
+                        <img class="background-img" src="assets/Bowling.png" alt="">
                     </div>
                     <div *ngSwitchCase="'Golf'">
-                        <img src="assets/Golf.png" alt="">
+                        <img class="background-img" src="assets/Golf.png" alt="">
                     </div>
                     <div *ngSwitchCase="'Volleyball'">
-                        <img src="assets/Volleyball.png" alt="">
+                        <img class="background-img" src="assets/Volleyball.png" alt="">
                     </div>
                     <div *ngSwitchDefault></div>
                 </div>
-                 <div>{{request.sport_type}}</div>
-             </div>
-             <div class="type">
-                 <div class="item">
-                     <div>{{request.player}}</div>
-                   <div>Players</div>
+                 <div class="title">
+                    <div [ngSwitch]="request['sport_type']">
+                        <div *ngSwitchCase="'Basketball'">
+                            <img src="assets/Basketball.png" alt="">
+                        </div>
+                        <div *ngSwitchCase="'Soccer'">
+                            <img src="assets/Soccer.png" alt="">
+                        </div>
+                        <div *ngSwitchCase="'Baseball'">
+                            <img src="assets/Baseball.png" alt="">
+                        </div>
+                        <div *ngSwitchCase="'Frisbee'">
+                            <img src="assets/Frisbee.png" alt="">
+                        </div>
+                        <div *ngSwitchCase="'Football'">
+                            <img src="assets/Football.png" alt="">
+                        </div>
+                        <div *ngSwitchCase="'Lacrosse'">
+                            <img src="assets/Lacrosse.png" alt="">
+                        </div>
+                        <div *ngSwitchCase="'Bowling'">
+                            <img src="assets/Bowling.png" alt="">
+                        </div>
+                        <div *ngSwitchCase="'Golf'">
+                            <img src="assets/Golf.png" alt="">
+                        </div>
+                        <div *ngSwitchCase="'Volleyball'">
+                            <img src="assets/Volleyball.png" alt="">
+                        </div>
+                        <div *ngSwitchDefault></div>
+                    </div>
+                     <div>{{request.sport_type}}</div>
                  </div>
-                 <div class="item">
-                     <div>{{request.player_miss}}</div>
-                     <div>Missing</div>
-                 </div>
-                 <div class="item">
-                     <div>
-                         <div class="stars-outer" style="font-size:15px">
-                             <div class="stars-inner"  class="stars-inner"
-                             [ngStyle]="{ width: stars(request.skill_level) }"></div>
-                           </div>
+                 <div class="type">
+                     <div class="item">
+                         <div>{{request.player}}</div>
+                       <div>Players</div>
                      </div>
-                     <div>
-                        Skill level
+                     <div class="item">
+                         <div>{{request.player_miss}}</div>
+                         <div>Missing</div>
+                     </div>
+                     <div class="item">
+                         <div>
+                             <div class="stars-outer" style="font-size:15px">
+                                 <div class="stars-inner"  class="stars-inner"
+                                 [ngStyle]="{ width: stars(request.skill_level) }"></div>
+                               </div>
+                         </div>
+                         <div>
+                            Skill level
+                         </div>
                      </div>
                  </div>
-             </div>
-             <div class="devider"></div>
-             <div class="location-time-container">
-                 <div class="time">
-                     <i class="fa fa-clock-o"></i>
-                     <div>{{request.time_schedule.split("T")[0]}} at {{request.time_schedule.split("T")[1]}}</div>
+                 <div class="devider"></div>
+                 <div class="location-time-container">
+                     <div class="time">
+                         <i class="fa fa-clock-o"></i>
+                         <div>{{request.time_schedule.split("T")[0]}} at {{request.time_schedule.split("T")[1]}}</div>
+                     </div>
+                     <div class="location">
+                         <i class="fa fa-map-marker"></i>
+                         <div>{{request.address}}</div>
+                     </div>
                  </div>
-                 <div class="location">
-                     <i class="fa fa-map-marker"></i>
-                     <div>{{request.address}}</div>
+                 <div class="devider"></div>
+                 <div class="participant">
+                     <div class="txt m-3" *ngIf="participants[i].length != 0" >Participants</div>
+    
+                     <div class="no-participant" *ngIf="participants[i].length == 0">
+                         No Participants!
+                     </div>
+                     <table mat-table *ngIf="participants[i].length != 0" [dataSource]="participants[i]" class="mat-elevation-z8">
+    
+                         <!--- Note that these columns can be defined in any order.
+                               The actual rendered columns are set as a property on the row definition" -->
+    
+                         <!-- Position Column -->
+                         <ng-container matColumnDef="number">
+                           <th mat-header-cell *matHeaderCellDef> No. </th>
+                           <td mat-cell *matCellDef="let element"> 1 </td>
+                         </ng-container>
+    
+                         <!-- Name Column -->
+                         <ng-container matColumnDef="name">
+                           <th mat-header-cell *matHeaderCellDef> Name </th>
+                           <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                         </ng-container>
+    
+                         <!-- Weight Column -->
+                         <ng-container matColumnDef="age">
+                           <th mat-header-cell *matHeaderCellDef> Age </th>
+                           <td mat-cell *matCellDef="let element"> {{element.age}} </td>
+                         </ng-container>
+    
+                         <!-- Symbol Column -->
+                         <ng-container matColumnDef="contact">
+                           <th mat-header-cell *matHeaderCellDef> Contact </th>
+                           <td mat-cell *matCellDef="let element"> <button mat-raised-button>{{element.phoneNumber}}</button> </td>
+                         </ng-container>
+    
+                         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                       </table>
                  </div>
-             </div>
-             <div class="devider"></div>
-             <div class="participant">
-                 <div class="txt m-3" *ngIf="participants[i].length != 0" >Participants</div>
-
-                 <div class="no-participant" *ngIf="participants[i].length == 0">
-                     No Participants!
+                 <div class="devider"></div>
+    
+                 <div class="info">
+                     <div class="position-btn-container">
+                         <button mat-raised-button color="warn" (click)="deleteRequest(request.id)">Delete</button>
+                     </div>
+                     <div class="accept-btn-container">
+    
+                         <button mat-raised-button color="primary" (click)="openDialog(request)">Modify</button>
+    
+                     </div>
+    
                  </div>
-                 <table mat-table *ngIf="participants[i].length != 0" [dataSource]="participants[i]" class="mat-elevation-z8">
-
-                     <!--- Note that these columns can be defined in any order.
-                           The actual rendered columns are set as a property on the row definition" -->
-
-                     <!-- Position Column -->
-                     <ng-container matColumnDef="number">
-                       <th mat-header-cell *matHeaderCellDef> No. </th>
-                       <td mat-cell *matCellDef="let element"> 1 </td>
-                     </ng-container>
-
-                     <!-- Name Column -->
-                     <ng-container matColumnDef="name">
-                       <th mat-header-cell *matHeaderCellDef> Name </th>
-                       <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-                     </ng-container>
-
-                     <!-- Weight Column -->
-                     <ng-container matColumnDef="age">
-                       <th mat-header-cell *matHeaderCellDef> Age </th>
-                       <td mat-cell *matCellDef="let element"> {{element.age}} </td>
-                     </ng-container>
-
-                     <!-- Symbol Column -->
-                     <ng-container matColumnDef="contact">
-                       <th mat-header-cell *matHeaderCellDef> Contact </th>
-                       <td mat-cell *matCellDef="let element"> <button mat-raised-button>{{element.phoneNumber}}</button> </td>
-                     </ng-container>
-
-                     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-                   </table>
-             </div>
-             <div class="devider"></div>
-
-             <div class="info">
-                 <div class="position-btn-container">
-                     <button mat-raised-button color="warn" (click)="deleteRequest(request.id)">Delete</button>
-                 </div>
-                 <div class="accept-btn-container">
-
-                     <button mat-raised-button color="primary" (click)="openDialog(request)">Modify</button>
-
-                 </div>
-
              </div>
          </div>
-     </div>
+    </div>
+    <div id="no-event" *ngIf="requests.length == 0">
+        <img src="assets/playByYourselfBig.png" alt="">
+    </div>
+
 </div>

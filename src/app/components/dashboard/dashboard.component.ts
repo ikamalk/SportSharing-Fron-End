@@ -21,7 +21,7 @@ export class DashboardComponent implements OnInit {
   latitude: number;
   longitude: number;
   zoom: number;
-  requests:Request[];
+  requests:Request[] = [];
   markers:Marker[] = [];
   account:Account;
   style = [
@@ -283,13 +283,13 @@ export class DashboardComponent implements OnInit {
   newParticipant:Participant;
   myParticipations:number[] = []; //list of id of request that the user joined
   numberOfParticipations:number[] = []; //how much participation each request
-  radius:number =1000;
+  radius:number =10000;
   onEventFocus:boolean = false;
+  isNoRequest:boolean = false;
   formatLabel(value: number) {
     if (value >= 1000) {
       return Math.round(value / 1000) + 'mi';
     }
-
     return value;
   }
   constructor(private requestService:RequestService,private mapsAPILoader: MapsAPILoader,
@@ -307,11 +307,9 @@ export class DashboardComponent implements OnInit {
 
   getMyParticipationsFunc(){
     this.participantService.getParticipationByAccountId(this.account.id).then(myParticipations=>{
-      console.log(myParticipations);
       myParticipations.forEach((participation=>{
        this.myParticipations.push(participation.request.id);
       }));
-      console.log(this.myParticipations);
     });
   }
 
@@ -340,21 +338,7 @@ export class DashboardComponent implements OnInit {
     this.markers =[];
     this.mapsAPILoader.load().then(() => {
       this.geocoder = new google.maps.Geocoder;
-      this.requests.forEach((request,i) => {
-        setTimeout(() => {
-          this.geocodeAddress(request['address'],request['sport_type']);
-        }, 100*i);
-        console.log("look");
-
-        console.log(request);
-
-      });
-      setTimeout(() => {
-        this.showHideMarkers();
-      }, this.requests.length*100);
-
-      console.log(this.markers);
-      console.log(this.requests);
+      this.geocodeAddress();
 
    });
   }
@@ -364,7 +348,6 @@ export class DashboardComponent implements OnInit {
     this.setCurrentLocation();
     this.requestService.getAllRequest().then(requests=>{
       this.requests = requests.reverse();
-     // console.log(this.requests);
       this.generateMarker();
       this.getMyParticipationsFunc();
       setTimeout(() => {
@@ -385,13 +368,29 @@ export class DashboardComponent implements OnInit {
 
 
 
+
+
   showHideMarkers(){
+    console.log("look");
+    console.log(this.markers.length);
+    console.log(this.markers);
     Object.values(this.markers).forEach((value,index) => {
       let condition =this.getDistanceBetween(value.lat,value.lng,this.latitude,this.longitude);
       value.isShown = condition;
-      this.requests[index].isShown = condition;
+      console.log("cfgfcgfgg");
+      this.requests[index]['isShown'] = condition;
+      if(index == this.markers.length -1) {
+        console.log(this.requests);
+        this.isNoRequest =this.requests.every(this.isFalse);
+        console.log(this.isNoRequest);
+      }
     });
 
+
+  }
+
+  isFalse(element:Request, index, array) {
+    return element.isShown == false;
   }
 
   getDistanceBetween(lat1,long1,lat2,long2){
@@ -399,10 +398,6 @@ export class DashboardComponent implements OnInit {
     var to = new google.maps.LatLng(lat2,long2);
 
     if(google.maps.geometry.spherical.computeDistanceBetween(from,to) <= this.radius){    
-      console.log('Radius',this.radius);
-      console.log('Distance Between',google.maps.geometry.spherical.computeDistanceBetween(
-        from,to
-      ));
       return true;
     }else{
       return false;
@@ -434,28 +429,35 @@ export class DashboardComponent implements OnInit {
       name:this.account.firstname + " " + this.account.lastname,
       phoneNumber:this.account.phoneNumber
     }
-    console.log(this.newParticipant);
     this.participantService.addParticipant(this.newParticipant).then((resp)=>{
       this.getAllRequest();
     })
   }
 
 
-  geocodeAddress(address:string,type_sport:string) {
-    this.geocoder.geocode({'address': address}, (results, status) => {
-          if (status === 'OK') {
-            let marker = {
-              lat:results[0].geometry.location.lat(),
-              lng:results[0].geometry.location.lng(),
-              sport_type:type_sport,
-              isShown:this.getDistanceBetween(results[0].geometry.location.lat(),results[0].geometry.location.lng(),this.latitude,this.longitude)
-            };
-            this.markers.push(marker);
+  geocodeAddress() {
+    this.requests.forEach((request,i)=>{
+      this.geocoder.geocode({'address': request['address']}, (results, status) => {
+        if (status === 'OK') {
+          let marker = {
+            lat:results[0].geometry.location.lat(),
+            lng:results[0].geometry.location.lng(),
+            sport_type:request['sport_type'],
+            isShown:this.getDistanceBetween(results[0].geometry.location.lat(),results[0].geometry.location.lng(),this.latitude,this.longitude)
+          };
+          this.markers.push(marker);
 
-          } else {
-            alert('Geocode was not successful for the following reason: ' + status);
-          }
+        } else {
+          alert('Geocode was not successful for the following reason: ' + status);
+        }
+        if(i == this.requests.length -1) {
+          this.showHideMarkers();
+      }
+  });
+
+
     });
+
   }
 
 }
