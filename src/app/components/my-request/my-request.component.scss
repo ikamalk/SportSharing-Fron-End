@@ -3,19 +3,36 @@
     overflow: hidden;
     height: 100%;
     #add{
+      position: absolute;
+      z-index: 1;
         button{
-            border-radius: 20px;
+          min-width: 41px !important;
+            width: 41px !important;
+            border-radius: 15px;
+            overflow: hidden;
+            -webkit-transition: width 1s;
+            transition: width 1s;
+            white-space: nowrap;
+            padding: 6px 10px;
         }
         button:hover{
           background-color: white;
           color:$primary-color;
+          width: 170px !important;
+          -webkit-transition: width 1s;
+          transition: width 1s;
+          overflow: hidden;
+          white-space: nowrap;
+        }
+        button:hover::after {
+        content: ' Create a New Event';
         }
     }
     #list-container{
         display: inline-block;
-        width: 90%;
+        width: 95%;
         margin: 0 5%;
-        height: calc(100% - 90px);
+        height: 100%;
         vertical-align: top;
         overflow: auto;
         .list{
