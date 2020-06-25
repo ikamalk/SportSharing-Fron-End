@@ -283,7 +283,7 @@ export class DashboardComponent implements OnInit {
   newParticipant:Participant;
   myParticipations:number[] = []; //list of id of request that the user joined
   numberOfParticipations:number[] = []; //how much participation each request
-  radius:number =3000;
+  radius:number =1000;
   onEventFocus:boolean = false;
   formatLabel(value: number) {
     if (value >= 1000) {
@@ -297,6 +297,7 @@ export class DashboardComponent implements OnInit {
     this.account = JSON.parse(localStorage.getItem("account"));
 
     this.getAllRequest();
+
   }
 
   ngOnInit(): void {
@@ -348,6 +349,10 @@ export class DashboardComponent implements OnInit {
         console.log(request);
 
       });
+      setTimeout(() => {
+        this.showHideMarkers();
+      }, this.requests.length*100);
+
       console.log(this.markers);
       console.log(this.requests);
 
@@ -358,7 +363,7 @@ export class DashboardComponent implements OnInit {
     this.onEventFocus = false;
     this.setCurrentLocation();
     this.requestService.getAllRequest().then(requests=>{
-      this.requests = requests;
+      this.requests = requests.reverse();
      // console.log(this.requests);
       this.generateMarker();
       this.getMyParticipationsFunc();
@@ -377,11 +382,7 @@ export class DashboardComponent implements OnInit {
       });
   }
 
-  eventRadius(type,$event) {
-    console.log(type,$event);
-    this.radius = $event;
-    this.showHideMarkers();
-  }
+
 
 
   showHideMarkers(){

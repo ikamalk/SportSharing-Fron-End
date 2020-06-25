@@ -128,7 +128,11 @@
     
             </div>
         </div>
+
     </ng-container>
+    <div *ngIf="requests.length == 0">
+        There is no event in your area!
+    </div>
 
 </div>
 <div id="maps-container"  [hidden]="!loading">
@@ -164,11 +168,9 @@
         
      </agm-marker>
     </ng-container>
-  
-
     <agm-circle [latitude]="latitude" [longitude]="longitude" [radius]="radius" [fillColor]="'yellow'"
         [circleDraggable]="false" [editable]="false" 
-        (radiusChange)="eventRadius('radiusChange',$event)">
+        (radiusChange)="showHideMarkers()">
     </agm-circle>
     </agm-map>
 </div>
