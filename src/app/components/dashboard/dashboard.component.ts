@@ -283,7 +283,7 @@ export class DashboardComponent implements OnInit {
   newParticipant:Participant;
   myParticipations:number[] = []; //list of id of request that the user joined
   numberOfParticipations:number[] = []; //how much participation each request
-  radius:number =2000;
+  radius:number =3000;
   onEventFocus:boolean = false;
   formatLabel(value: number) {
     if (value >= 1000) {
@@ -377,7 +377,7 @@ export class DashboardComponent implements OnInit {
       });
   }
 
-  event(type,$event) {
+  eventRadius(type,$event) {
     console.log(type,$event);
     this.radius = $event;
     this.showHideMarkers();
@@ -385,9 +385,12 @@ export class DashboardComponent implements OnInit {
 
 
   showHideMarkers(){
-    Object.values(this.markers).forEach(value => {
-      value.isShown = this.getDistanceBetween(value.lat,value.lng,this.latitude,this.longitude);
+    Object.values(this.markers).forEach((value,index) => {
+      let condition =this.getDistanceBetween(value.lat,value.lng,this.latitude,this.longitude);
+      value.isShown = condition;
+      this.requests[index].isShown = condition;
     });
+
   }
 
   getDistanceBetween(lat1,long1,lat2,long2){

@@ -10,4 +10,5 @@ export interface Request {
     time_schedule:string;
     address:string;
     player_miss:number;
+    isShown:boolean;
   }
