@@ -132,20 +132,41 @@
     <button mat-raised-button color="primary" *ngIf="onEventFocus" (click)="getAllRequest()">
         <i class="fa fa-map-marker"></i>
          Show All events</button>
-
+         <div id="slider">
+            <mat-slider
+            color="primary"
+            thumbLabel
+            [displayWith]="formatLabel"
+            tickInterval="1000"
+            [(ngModel)]="radius"
+            min="1000"
+            max="15000"
+            step="1000"
+            ></mat-slider>
+         </div>
     <agm-map [latitude]="latitude"
     [longitude]="longitude"
     [zoom]="zoom"
     [streetViewControl]="false"
     [styles]="style">
-    <agm-marker *ngFor="let marker of markers;let i = index" (markerClick)="seePosition(i)" [latitude]="marker.lat" [longitude]="marker.lng" [markerDraggable]="false"
-   [iconUrl]="{
-    url: './assets/pins/'+marker.sport_type+'Pin.png',
-    scaledSize: {
-        width: 60,
-        height: 60
-    }}"
-    ></agm-marker>
+    <ng-container *ngFor="let marker of markers;let i = index">
+        <agm-marker   *ngIf="marker.isShown" (markerClick)="seePosition(i)" [latitude]="marker.lat" [longitude]="marker.lng" [markerDraggable]="false"
+        [iconUrl]="{
+         url: './assets/pins/'+marker.sport_type+'Pin.png',
+         scaledSize: {
+             width: 60,
+             height: 60
+         }}" 
+         >
+        
+     </agm-marker>
+    </ng-container>
+  
+
+    <agm-circle [latitude]="latitude" [longitude]="longitude" [radius]="radius" [fillColor]="'green'"
+        [circleDraggable]="false" [editable]="false" 
+        (radiusChange)="event('radiusChange',$event)">
+    </agm-circle>
     </agm-map>
 </div>
 

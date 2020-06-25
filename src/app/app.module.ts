@@ -35,6 +35,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { MyRequestComponent } from './components/my-request/my-request.component';
 import { RequestDialog } from './components/my-request/requestDialog/request-dialog';
 import { MatNativeDateModule } from '@angular/material/core';
+import {MatSliderModule} from '@angular/material/slider';
 
 let UrlForJwt = environment.urlForJWT;
 let url = environment.url;
@@ -77,6 +78,7 @@ export function tokenGetter() {
     MatToolbarModule,
     MatNativeDateModule,
     MatSelectModule,
+    MatSliderModule,
     AvatarModule,
     MatDatepickerModule,
     AgmCoreModule.forRoot({

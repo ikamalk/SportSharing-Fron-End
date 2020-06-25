@@ -283,8 +283,15 @@ export class DashboardComponent implements OnInit {
   newParticipant:Participant;
   myParticipations:number[] = []; //list of id of request that the user joined
   numberOfParticipations:number[] = []; //how much participation each request
-
+  radius:number =2000;
   onEventFocus:boolean = false;
+  formatLabel(value: number) {
+    if (value >= 1000) {
+      return Math.round(value / 1000) + 'mi';
+    }
+
+    return value;
+  }
   constructor(private requestService:RequestService,private mapsAPILoader: MapsAPILoader,
     private ngZone: NgZone,private participantService:ParticipantService) {
     this.account = JSON.parse(localStorage.getItem("account"));
@@ -370,6 +377,34 @@ export class DashboardComponent implements OnInit {
       });
   }
 
+  event(type,$event) {
+    console.log(type,$event);
+    this.radius = $event;
+    this.showHideMarkers();
+  }
+
+
+  showHideMarkers(){
+    Object.values(this.markers).forEach(value => {
+      value.isShown = this.getDistanceBetween(value.lat,value.lng,this.latitude,this.longitude);
+    });
+  }
+
+  getDistanceBetween(lat1,long1,lat2,long2){
+    var from = new google.maps.LatLng(lat1,long1);
+    var to = new google.maps.LatLng(lat2,long2);
+
+    if(google.maps.geometry.spherical.computeDistanceBetween(from,to) <= this.radius){    
+      console.log('Radius',this.radius);
+      console.log('Distance Between',google.maps.geometry.spherical.computeDistanceBetween(
+        from,to
+      ));
+      return true;
+    }else{
+      return false;
+    }
+  }
+
   stars(val) {
     const starPercentage = (val / 5) * 100;
     const starPercentageRounded = `${(starPercentage / 10) * 10}%`;
@@ -408,7 +443,8 @@ export class DashboardComponent implements OnInit {
             let marker = {
               lat:results[0].geometry.location.lat(),
               lng:results[0].geometry.location.lng(),
-              sport_type:type_sport
+              sport_type:type_sport,
+              isShown:this.getDistanceBetween(results[0].geometry.location.lat(),results[0].geometry.location.lng(),this.latitude,this.longitude)
             };
             this.markers.push(marker);
 
