@@ -9,7 +9,6 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { JwtModule } from "@auth0/angular-jwt";
 import { HttpClientModule } from "@angular/common/http";
-import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -41,7 +40,6 @@ let UrlForJwt = environment.urlForJWT;
 let url = environment.url;
 
 export function tokenGetter() {
-  console.log("token !!!");
   return localStorage.getItem("token");
 }
 @NgModule({
@@ -50,7 +48,6 @@ export function tokenGetter() {
   ],
   declarations: [
     AppComponent,
-    RegisterComponent,
     LoginComponent,
     DashboardContainerComponent,
     MenuComponent,

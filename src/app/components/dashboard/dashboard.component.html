@@ -130,8 +130,8 @@
         </div>
 
     </ng-container>
-    <div *ngIf="isNoRequest">
-        <img style="width:100%" src="assets/playByYourself.png" alt="">
+    <div id="no-request" *ngIf="isNoRequest">
+        <img src="assets/playByYourself.png" alt="">
     </div>
 
 </div>
@@ -168,7 +168,7 @@
         
      </agm-marker>
     </ng-container>
-   <agm-circle [latitude]="latitude" [longitude]="longitude" [radius]="radius" [fillColor]="'yellow'"
+   <agm-circle *ngIf="latitude" [latitude]="latitude" [longitude]="longitude" [radius]="radius" [fillColor]="'yellow'"
         [circleDraggable]="false" [editable]="false" 
         (radiusChange)="showHideMarkers()">
     </agm-circle>

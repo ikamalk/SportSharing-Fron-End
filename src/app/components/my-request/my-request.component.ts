@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { RequestDialog } from './requestDialog/request-dialog';
 import { Account } from 'src/app/models/Account';
@@ -16,7 +16,7 @@ declare var google;
 export class MyRequestComponent implements OnInit {
   private geocoder: any;
   account:Account;
-  requests:Request[];
+  requests:Request[] = [];
   displayedColumns: string[] = ['number', 'name', 'age', 'contact'];
   participants:any[] =[];
   loading:boolean = false;
@@ -25,7 +25,7 @@ export class MyRequestComponent implements OnInit {
   "assets/pins/SoccerPin.png","assets/pins/FrisbeePin.png","assets/pins/TennisPin.png"];
   imgLoader:string=this.pinslist[5];
   constructor(public dialog: MatDialog,private requestService:RequestService,
-    private mapsAPILoader: MapsAPILoader,private participantService:ParticipantService) {
+    private mapsAPILoader: MapsAPILoader,private participantService:ParticipantService,private cdr: ChangeDetectorRef) {
     this.account = JSON.parse(localStorage.getItem("account"));
     this.getRequestById(this.account.id);
   }
@@ -34,6 +34,7 @@ export class MyRequestComponent implements OnInit {
     let i = 0;
     this.startLoading =true;
     this.startpins();
+    this.cdr.detectChanges();
   }
 
 
@@ -65,7 +66,6 @@ export class MyRequestComponent implements OnInit {
       setTimeout(() => {
         this.loading = true;
       }, 1000);
-      console.log(this.participants);
     })
   }
 

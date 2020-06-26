@@ -20,7 +20,6 @@ declare var google;
         private requestService:RequestService,private matDialog: MatDialog,@Inject(MAT_DIALOG_DATA) public requestData: Request){
             this.account = JSON.parse(localStorage.getItem("account"));
             this.request = requestData;
-            console.log(this.request);
             
         if(this.request == null){
           this.requestForm = this.formBuilder.group({
@@ -49,21 +48,17 @@ declare var google;
     }
 
     sendRequest(){
-        console.log(this.searchElementRef.nativeElement.value);
         this.requestForm.value.player_miss = this.requestForm.value.player;
         this.requestForm.value.address = this.searchElementRef.nativeElement.value;
-        console.log(this.requestForm.value);
        this.requestService.addRequest(this.requestForm.value).then(request=>{
            this.matDialog.closeAll();    
            });
     }
 
     updateRequest(){
-      console.log(this.requestForm.value);
       this.requestForm.value.player_miss = this.requestForm.value.player;
       this.requestForm.value.address = this.searchElementRef.nativeElement.value;
       this.requestService.updateRequest(this.requestForm.value).then(request=>{
-          console.log(request);
           this.matDialog.closeAll();    
           });
     }

@@ -1,4 +1,4 @@
-import { Component, OnInit, NgZone } from '@angular/core';
+import { Component, OnInit, NgZone, ChangeDetectorRef } from '@angular/core';
 import { RequestService } from 'src/app/services/request.service';
 import { Account } from 'src/app/models/Account';
 import { MapsAPILoader } from '@agm/core';
@@ -293,7 +293,7 @@ export class DashboardComponent implements OnInit {
     return value;
   }
   constructor(private requestService:RequestService,private mapsAPILoader: MapsAPILoader,
-    private ngZone: NgZone,private participantService:ParticipantService) {
+    private ngZone: NgZone,private participantService:ParticipantService,private cdr: ChangeDetectorRef) {
     this.account = JSON.parse(localStorage.getItem("account"));
 
     this.getAllRequest();
@@ -332,6 +332,8 @@ export class DashboardComponent implements OnInit {
     let i = 0;
     this.startLoading =true;
     this.startpins();
+    this.cdr.detectChanges();
+
   }
 
   generateMarker(){
@@ -346,14 +348,6 @@ export class DashboardComponent implements OnInit {
   getAllRequest(){
     this.onEventFocus = false;
     this.setCurrentLocation();
-    this.requestService.getAllRequest().then(requests=>{
-      this.requests = requests.reverse();
-      this.generateMarker();
-      this.getMyParticipationsFunc();
-      setTimeout(() => {
-        this.loading = true;
-      }, 2000);
-    })
   }
 
 
@@ -362,6 +356,14 @@ export class DashboardComponent implements OnInit {
         this.latitude = position.coords.latitude;
         this.longitude = position.coords.longitude;
         this.zoom = 11;
+        this.requestService.getAllRequest().then(requests=>{
+          this.requests = requests.reverse();
+          this.generateMarker();
+          this.getMyParticipationsFunc();
+          setTimeout(() => {
+            this.loading = true;
+          }, 2000);
+        })
       });
   }
 
@@ -371,18 +373,12 @@ export class DashboardComponent implements OnInit {
 
 
   showHideMarkers(){
-    console.log("look");
-    console.log(this.markers.length);
-    console.log(this.markers);
     Object.values(this.markers).forEach((value,index) => {
       let condition =this.getDistanceBetween(value.lat,value.lng,this.latitude,this.longitude);
       value.isShown = condition;
-      console.log("cfgfcgfgg");
       this.requests[index]['isShown'] = condition;
       if(index == this.markers.length -1) {
-        console.log(this.requests);
         this.isNoRequest =this.requests.every(this.isFalse);
-        console.log(this.isNoRequest);
       }
     });
 
@@ -454,9 +450,10 @@ export class DashboardComponent implements OnInit {
           this.showHideMarkers();
       }
   });
-
-
     });
+    if(this.requests.length == 0) {
+      this.isNoRequest = true;
+    }
 
   }
 

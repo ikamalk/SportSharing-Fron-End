@@ -15,10 +15,8 @@ export class NavbarComponent implements OnInit {
     private serviceAccount:AccountService,
     private router:Router) {
     this.account = JSON.parse(localStorage.getItem("account"));
-    console.log(this.account);
     this.sharedService.getNewTab().subscribe((tab)=>{
       this.tab = tab;
-      console.log(this.tab);
     });
   }
 
@@ -27,7 +25,6 @@ export class NavbarComponent implements OnInit {
   }
 
   logout(){
-    console.log("anything YOOO");
     this.serviceAccount.removeAccountSession();
     this.router.navigate(['/']);
   }

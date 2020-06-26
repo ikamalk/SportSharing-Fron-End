@@ -69,36 +69,18 @@ export class LoginComponent implements OnInit {
     }, 2100);
   }
 
- /* login(){
-    this.isLoading = true;
-    this.service.login(this.loginForm.value.username,this.loginForm.value.password).then((resp)=>{
-      console.log(resp);
-      localStorage.setItem("token",resp["jwt"]);
-     console.log(localStorage.getItem("token"));
-        this.service.hello();
-        setTimeout(() => {
-          this.isLoading= false;
-          this.router.navigate(["dashboard"]);
-        }, 1000);
-    }).catch(error=>{
-      this.isLoading= false;
-    });
-    
-  }*/
+
 
   login(){
     if(this.loginForm.valid){
       this.service.login(this.loginForm.value.username,this.loginForm.value.password).then((resp)=>{
-        console.log(resp);
         localStorage.setItem("token",resp["jwt"]);
-       console.log(localStorage.getItem("token"));
        this.accountService.getAccountSession(this.loginForm.value.username);
           this.successLogin();
           setTimeout(() => {
             this.router.navigateByUrl("dashboard/(my:board)");
           }, 1000);
       }).catch(error=>{
-        console.log(error);
         this.failureLogin();
       });
     }
@@ -109,16 +91,10 @@ export class LoginComponent implements OnInit {
     if(this.registerForm.valid){
 
     this.accountService.addAccount(this.registerForm.value).then((res)=>{
-      console.log(
-        'ok'
-      );
       this.MsgRegister();
       this.isRegisterSuccess = true;
       this.isLogin = true;
     }).catch(error=>{
-      console.log(
-        error
-      );
     })
   }
   }

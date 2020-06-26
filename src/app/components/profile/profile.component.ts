@@ -34,9 +34,7 @@ export class ProfileComponent implements OnInit {
   }
 
   update(){
-    console.log(this.accountForm.value);
     this.accountService.updateAccount(this.accountForm.value).then((resp)=>{
-      console.log(resp);
       localStorage.setItem("account",JSON.stringify(resp));
     })
   }

@@ -15,7 +15,6 @@ export class MenuComponent implements OnInit {
 
 
   sendTab(tab:string){
-    console.log(tab);
     this.sharedService.sendNewTab(tab);
   }
 
