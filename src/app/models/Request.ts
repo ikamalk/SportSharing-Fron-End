@@ -11,4 +11,8 @@ export interface Request {
     address:string;
     player_miss:number;
     isShown:boolean;
+    lat:number;
+    lng:number;
+    expired:boolean;
+    completed:boolean;
   }

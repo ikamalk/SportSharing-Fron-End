@@ -15,8 +15,8 @@ export class RequestService {
     return this.http.post<Request>(this.url+"request/set",request).toPromise();
    }
 
-   getAllRequest():Promise<Request[]>{
-    return this.http.get<Request[]>(this.url+"request/getall").toPromise();
+   getAllRequest(latGPS:number,lngGPS:number,radius:number):Promise<Request[]>{
+    return this.http.get<Request[]>(this.url+`request/getall/${latGPS}/${lngGPS}/${radius}`).toPromise();
    }
    getRequestByAccountId(id:number):Promise<Request[]>{
     return this.http.get<Request[]>(`${this.url}request/${id}`).toPromise();

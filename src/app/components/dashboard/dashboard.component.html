@@ -4,7 +4,7 @@
 </div>
 <div id="list-container" [hidden]="!loading" [ngStyle]="{'overflow':isNoRequest ? 'hidden' : 'auto' }">
     <ng-container *ngFor="let request of requests;let i = index">
-        <div class="list" *ngIf="request.isShown">
+        <div class="list">
             <div [ngSwitch]="request.sport_type">
                 <div *ngSwitchCase="'Basketball'">
                     <img class="background-img" src="assets/Basketball.png" alt="">
@@ -156,10 +156,10 @@
     [zoom]="zoom"
     [streetViewControl]="false"
     [styles]="style">
-    <ng-container *ngFor="let marker of markers;let i = index">
-        <agm-marker   *ngIf="marker.isShown" (markerClick)="seePosition(i)" [latitude]="marker.lat" [longitude]="marker.lng" [markerDraggable]="false"
+    <ng-container *ngFor="let request of requests;let i = index">
+        <agm-marker  (markerClick)="seePosition(i)" [latitude]="request.lat" [longitude]="request.lng" [markerDraggable]="false"
         [iconUrl]="{
-         url: './assets/pins/'+marker.sport_type+'Pin.png',
+         url: './assets/pins/'+request.sport_type+'Pin.png',
          scaledSize: {
              width: 60,
              height: 60
@@ -170,7 +170,7 @@
     </ng-container>
    <agm-circle *ngIf="latitude" [latitude]="latitude" [longitude]="longitude" [radius]="radius" [fillColor]="'yellow'"
         [circleDraggable]="false" [editable]="false" 
-        (radiusChange)="showHideMarkers()">
+        (radiusChange)="getAllRequest()">
     </agm-circle>
     </agm-map>
 </div>

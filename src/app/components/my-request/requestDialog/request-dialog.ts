@@ -15,12 +15,12 @@ declare var google;
     account:Account;
     request:Request;
     @ViewChild('search') searchElementRef: ElementRef;
+    geocoder: any;
 
     constructor(private formBuilder:FormBuilder,private mapsAPILoader:MapsAPILoader,private ngZone:NgZone,
         private requestService:RequestService,private matDialog: MatDialog,@Inject(MAT_DIALOG_DATA) public requestData: Request){
             this.account = JSON.parse(localStorage.getItem("account"));
             this.request = requestData;
-            
         if(this.request == null){
           this.requestForm = this.formBuilder.group({
             id: [0],
@@ -30,7 +30,11 @@ declare var google;
             player_miss: ["", Validators.required],
             skill_level: ["", Validators.required],
             time_schedule: ["", Validators.required],
-            address: ["", Validators.required]
+            address: ["", Validators.required],
+            lat: [0],
+            lng: [0],
+            expired: [false],
+            completed:[false]
           });
         } else {
           this.requestForm = this.formBuilder.group({
@@ -41,18 +45,24 @@ declare var google;
             player_miss: [this.request.player, Validators.required],
             skill_level: [this.request.skill_level, Validators.required],
             time_schedule: [this.request.time_schedule, Validators.required],
-            address: [this.request.address, Validators.required]
+            address: [this.request.address, Validators.required],
+            lat: [this.request.lat],
+            lng: [this.request.lng],
+            expired: [this.request.expired],
+            completed:[this.request.completed]
           });
         }
 
     }
 
-    sendRequest(){
+    async sendRequest(){
         this.requestForm.value.player_miss = this.requestForm.value.player;
         this.requestForm.value.address = this.searchElementRef.nativeElement.value;
+       await this.geocodeAddress();
        this.requestService.addRequest(this.requestForm.value).then(request=>{
-           this.matDialog.closeAll();    
-           });
+        this.matDialog.closeAll();    
+        });
+
     }
 
     updateRequest(){
@@ -80,4 +90,23 @@ declare var google;
              });
            });
        }
+
+
+       geocodeAddress() {
+        return new Promise((resolved,rejected)=>{
+          this.mapsAPILoader.load().then(() => {
+            this.geocoder = new google.maps.Geocoder;
+            this.geocoder.geocode({'address': this.requestForm.value.address}, (results, status) => {
+              if (status === 'OK') {
+               this.requestForm.value.lat = results[0].geometry.location.lat();
+               this.requestForm.value.lng = results[0].geometry.location.lng();
+               resolved();
+              } else {
+                alert('Geocode was not successful for the following reason: ' + status);
+                rejected();
+              }
+        });
+         });
+         })
+    }
   }

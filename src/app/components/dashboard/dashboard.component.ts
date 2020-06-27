@@ -288,7 +288,7 @@ export class DashboardComponent implements OnInit {
   isNoRequest:boolean = false;
   formatLabel(value: number) {
     if (value >= 1000) {
-      return Math.round(value / 1000) + 'mi';
+      return Math.round((value/1.609) / 1000) + 'mi';
     }
     return value;
   }
@@ -298,6 +298,10 @@ export class DashboardComponent implements OnInit {
 
     this.getAllRequest();
 
+  }
+
+  kmToMiles(km:number){
+    return (km/1.609);
   }
 
   ngOnInit(): void {
@@ -327,7 +331,6 @@ export class DashboardComponent implements OnInit {
       })
     }, 250);
   }
-
   ngAfterViewInit(){
     let i = 0;
     this.startLoading =true;
@@ -336,35 +339,30 @@ export class DashboardComponent implements OnInit {
 
   }
 
-  generateMarker(){
-    this.markers =[];
-    this.mapsAPILoader.load().then(() => {
-      this.geocoder = new google.maps.Geocoder;
-      this.geocodeAddress();
 
-   });
-  }
 
-  getAllRequest(){
+  async getAllRequest(){
     this.onEventFocus = false;
-    this.setCurrentLocation();
+   await this.setCurrentLocation();
+   this.requestService.getAllRequest(this.latitude,this.longitude,this.radius/1609).then(requests=>{
+    this.requests = requests.reverse();
+    this.getMyParticipationsFunc();
+      this.loading = true;
+  })
   }
-
 
   setCurrentLocation() {
+    return new Promise((resolved,rejected)=>{
       navigator.geolocation.getCurrentPosition((position) => {
         this.latitude = position.coords.latitude;
         this.longitude = position.coords.longitude;
         this.zoom = 11;
-        this.requestService.getAllRequest().then(requests=>{
-          this.requests = requests.reverse();
-          this.generateMarker();
-          this.getMyParticipationsFunc();
-          setTimeout(() => {
-            this.loading = true;
-          }, 2000);
-        })
+        resolved();
+      },error=>{
+        rejected();
       });
+    })
+     
   }
 
 
@@ -372,7 +370,7 @@ export class DashboardComponent implements OnInit {
 
 
 
-  showHideMarkers(){
+  /*showHideMarkers(){
     Object.values(this.markers).forEach((value,index) => {
       let condition =this.getDistanceBetween(value.lat,value.lng,this.latitude,this.longitude);
       value.isShown = condition;
@@ -381,23 +379,10 @@ export class DashboardComponent implements OnInit {
         this.isNoRequest =this.requests.every(this.isFalse);
       }
     });
-
-
-  }
+  }*/
 
   isFalse(element:Request, index, array) {
     return element.isShown == false;
-  }
-
-  getDistanceBetween(lat1,long1,lat2,long2){
-    var from = new google.maps.LatLng(lat1,long1);
-    var to = new google.maps.LatLng(lat2,long2);
-
-    if(google.maps.geometry.spherical.computeDistanceBetween(from,to) <= this.radius){    
-      return true;
-    }else{
-      return false;
-    }
   }
 
   stars(val) {
@@ -409,9 +394,8 @@ export class DashboardComponent implements OnInit {
 
   seePosition(index:number){
     this.onEventFocus =true;
-    this.markers = [this.markers[index]];
-    this.latitude = this.markers[0].lat;
-    this.longitude = this.markers[0].lng;
+    this.latitude = this.requests[index].lat;
+    this.longitude = this.requests[index].lng;
     this.zoom = 15;
     this.requests = [this.requests[index]];
   }
@@ -429,32 +413,4 @@ export class DashboardComponent implements OnInit {
       this.getAllRequest();
     })
   }
-
-
-  geocodeAddress() {
-    this.requests.forEach((request,i)=>{
-      this.geocoder.geocode({'address': request['address']}, (results, status) => {
-        if (status === 'OK') {
-          let marker = {
-            lat:results[0].geometry.location.lat(),
-            lng:results[0].geometry.location.lng(),
-            sport_type:request['sport_type'],
-            isShown:this.getDistanceBetween(results[0].geometry.location.lat(),results[0].geometry.location.lng(),this.latitude,this.longitude)
-          };
-          this.markers.push(marker);
-
-        } else {
-          alert('Geocode was not successful for the following reason: ' + status);
-        }
-        if(i == this.requests.length -1) {
-          this.showHideMarkers();
-      }
-  });
-    });
-    if(this.requests.length == 0) {
-      this.isNoRequest = true;
-    }
-
-  }
-
 }
