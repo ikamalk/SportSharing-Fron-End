@@ -286,6 +286,7 @@ export class DashboardComponent implements OnInit {
   radius:number =10000;
   onEventFocus:boolean = false;
   isNoRequest:boolean = false;
+  isSliderVertical:boolean = true;
   formatLabel(value: number) {
     if (value >= 1000) {
       return Math.round((value/1.609) / 1000) + 'mi';
@@ -345,7 +346,7 @@ export class DashboardComponent implements OnInit {
     this.onEventFocus = false;
    await this.setCurrentLocation();
    this.requestService.getAllRequest(this.latitude,this.longitude,this.radius/1609).then(requests=>{
-    this.requests = requests.reverse();
+    this.requests = requests;
     this.getMyParticipationsFunc();
       this.loading = true;
   })
@@ -362,9 +363,7 @@ export class DashboardComponent implements OnInit {
         rejected();
       });
     })
-     
   }
-
 
 
 

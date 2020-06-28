@@ -1,5 +1,5 @@
 @import "../../../../styles.scss";
-#container{
+#desktop-container{
     min-width: 275px;
     background-color: rgba(46, 125, 50);
     // opacity: 0.95;
@@ -56,3 +56,71 @@
         }
       }
 }
+#mobile-container {
+  display: none;
+}
+
+
+@media screen and (max-width: 992px) {
+  #desktop-container {
+     display: none;
+   }
+   #mobile-container{
+     display: block;
+    min-width: 275px;
+    background-color: rgba(46, 125, 50);
+    // opacity: 0.95;
+    height: calc(100vh - 60px);
+  
+    img{
+      position: absolute;
+      bottom: 0;
+    }
+  
+    #list-container {
+        padding: 0px 0px;
+        border-radius: 20px;
+        // background-color: #fff;
+        text-align: left !important;
+        //cursor: pointer;
+        .item {
+          color: #ffffff;
+          text-align: left;
+          padding: 20px 10px ;
+          outline: 0;
+          cursor: pointer;
+          position: relative;
+          i {
+            font-size: 22px;
+            margin: 10px 20px 10px 20px;
+          }
+          div {
+            font-size: 16px;
+            display: inline-block;
+          }
+        }
+        .item:hover {
+          background-color: #e7fde9;
+          color:$primary-color;
+        }
+  
+        .active {
+          font-weight: 700;
+          position: relative;
+          color: $primary-color;
+          background-color: #ffffffcc;
+          outline: 0;
+          .indicator {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 4px;
+            height: 40px;
+            background-color: $primary-color;
+            border-radius: 50px;
+            height: 75px;
+          }
+        }
+      }
+  }
+ }

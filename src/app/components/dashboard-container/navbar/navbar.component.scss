@@ -1,5 +1,5 @@
 @import "../../../../styles.scss";
-#container{
+#desktop-container{
     height: 100px;
     background-color: $primary-color;
     #logo{
@@ -91,6 +91,9 @@
         }
     }
 }
+#mobile-container{
+  display: none;
+}
 
 
 @keyframes tracking-in-expand {
@@ -132,3 +135,25 @@
       opacity: 1;
     }
   }
+/************************************************************************************************/
+
+  @media screen and (max-width: 992px) {
+    #desktop-container {
+       display: none;
+     }
+     #mobile-container{
+       display: block;
+       mat-toolbar{
+         height: 60px;
+         #toolbar-img{
+           display: inline-block;
+           width: 100%;
+           #logo-img-container{
+             display: table;
+             margin: auto;
+           }
+
+         }
+       }
+     }
+   }

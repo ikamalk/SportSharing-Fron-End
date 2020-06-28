@@ -1,4 +1,41 @@
-<div id="container">
+<div id="desktop-container">
+  <img src="assets/baskeyIMG.png" alt="">
+    <div id="list-container">
+        <div
+          class="item"
+          [routerLink]="[{ outlets: { my: ['board'] } }]"
+          [routerLinkActive]="['active']"
+          (click)="sendTab('board')"
+        >
+        <i class="fa fa-search"></i>
+          <div>Find Events</div>
+          <div class="indicator"></div>
+        </div>
+        <div
+          class="item"
+          [routerLink]="[{ outlets: { my: ['request'] } }]"
+          [routerLinkActive]="['active']"
+          (click)="sendTab('request')"
+
+        >
+        <i class="fa fa-calendar"></i>
+        <div>My Events</div>
+          <div class="indicator"></div>
+        </div>
+        <div
+          class="item"
+          [routerLink]="[{ outlets: { my: ['profile'] } }]"
+          [routerLinkActive]="['active']"
+          (click)="sendTab('profile')"
+
+        >
+        <i class="fa fa-user-circle"></i>
+          <div>Profile</div>
+          <div class="indicator"></div>
+        </div>
+      </div>
+</div>
+<div id="mobile-container">
   <img src="assets/baskeyIMG.png" alt="">
     <div id="list-container">
         <div

@@ -195,3 +195,25 @@ $font-color-gray:#c7c7c7;
 .mat-slider-thumb-label-text {
   opacity: 1 !important;
 }
+
+
+//Slider
+
+::ng-deep .mat-slider-thumb-label {
+  border-radius: 8px 8px !important;
+  display: flex !important;
+  flex: 1 0 100%;
+  flex-direction: row;
+  padding-left: 6px;
+  padding-right: 6px;
+  overflow: hidden;
+  flex-wrap: nowrap;
+  white-space: nowrap;
+  left: 20px !important;
+  width: unset !important;
+  transform: rotate(0deg) !important;
+}
+
+::ng-deep .mat-slider-thumb-label-text {
+  transform: rotate(0) !important;
+}

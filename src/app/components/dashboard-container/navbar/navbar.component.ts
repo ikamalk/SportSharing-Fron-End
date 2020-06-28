@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { SharedService } from 'src/app/services/shared.service';
 import { AccountService } from 'src/app/services/account.service';
 import { Router } from '@angular/router';
@@ -11,6 +11,8 @@ import { Router } from '@angular/router';
 export class NavbarComponent implements OnInit {
   tab:String = "board";
   account:Account;
+  @Output() toggle = new EventEmitter<void>();
+
   constructor(private sharedService:SharedService,
     private serviceAccount:AccountService,
     private router:Router) {
@@ -22,6 +24,10 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void {
 
+  }
+
+  toggleFunc() {
+    this.toggle.emit();
   }
 
   logout(){

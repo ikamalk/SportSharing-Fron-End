@@ -22,7 +22,6 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatTableModule} from '@angular/material/table';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatDatepickerModule} from '@angular/material/datepicker';
-
 import { DashboardContainerComponent } from './components/dashboard-container/dashboard-container.component';
 import { MenuComponent } from './components/dashboard-container/menu/menu.component';
 import { ContentComponent } from './components/dashboard-container/content/content.component';
@@ -35,6 +34,7 @@ import { MyRequestComponent } from './components/my-request/my-request.component
 import { RequestDialog } from './components/my-request/requestDialog/request-dialog';
 import { MatNativeDateModule } from '@angular/material/core';
 import {MatSliderModule} from '@angular/material/slider';
+import { SecondToTimeDirective } from './secondsToTime';
 
 let UrlForJwt = environment.urlForJWT;
 let url = environment.url;
@@ -56,7 +56,8 @@ export function tokenGetter() {
     DashboardComponent,
     ProfileComponent,
     MyRequestComponent,
-    RequestDialog
+    RequestDialog,
+    SecondToTimeDirective
   ],
   imports: [
     BrowserModule,
