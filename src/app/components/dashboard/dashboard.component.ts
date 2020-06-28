@@ -393,7 +393,7 @@ export class DashboardComponent implements OnInit {
 
   seePosition(index:number){
     this.onEventFocus =true;
-    this.latitude = this.requests[index].lat;
+    this.latitude = this.requests[index].lat-0.0015;
     this.longitude = this.requests[index].lng;
     this.zoom = 15;
     this.requests = [this.requests[index]];
