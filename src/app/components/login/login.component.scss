@@ -9,7 +9,7 @@
     background:url("../../../assets/PickupBackground.png");
     background-position: center;
     background-size: cover;
-    animation: 1.5s bluranim both 1.5s, fade-in 1s ease-in 0.2s both;
+  //  animation: 1.5s bluranim both 1.5s, fade-in 1s ease-in 0.2s both;
 
   }
   #container {
@@ -24,8 +24,8 @@
       display: block;
       margin: auto;
       box-shadow: -5px 1px 20px #00000082;
-      clip-path: circle(80% at 50% 50%);
-        animation: 1.5s anime-card both 1.5s, fade-in 1s ease-in 0.2s both;
+     // clip-path: circle(80% at 50% 50%);
+      //  animation: 1.5s anime-card both 1.5s, fade-in 1s ease-in 0.2s both;
   
         #welcome{
           #logo{
@@ -40,7 +40,7 @@
     .row{
       border-radius: 20px;
       opacity: 1;
-      animation: 3s smooth-anime both;
+   //   animation: 3s smooth-anime both;
   
     }
   
@@ -304,7 +304,7 @@
         background:url("../../../assets/PickupBackground.png");
         background-position: center;
         background-size: cover;
-        animation: 1.5s bluranim both 1.5s, fade-in 1s ease-in 0.2s both;
+       // animation: 1.5s bluranim both 1.5s, fade-in 1s ease-in 0.2s both;
     
       }
       #container{
@@ -320,7 +320,6 @@
           box-shadow: -5px 1px 20px #00000082;
         //  clip-path: circle(80% at 50% 50%);
           //  animation: 1.5s anime-card both 1.5s, fade-in 1s ease-in 0.2s both;
-      
             #welcome{
               #logo{
                 width: 500px;
@@ -348,7 +347,7 @@
             width: 200px;
           }
           #form-container{
-            padding: 30px 70px;
+            padding: 10px 30px;
             mat-form-field {
       
               input {
@@ -391,7 +390,7 @@
             }
           }
           #register-container{
-            padding: 0 70px;
+            padding: 10px 30px;
             height: 370px;
             overflow: auto;
             mat-form-field {

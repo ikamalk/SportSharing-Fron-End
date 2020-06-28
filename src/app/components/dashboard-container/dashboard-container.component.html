@@ -6,7 +6,7 @@
     </div>
 
     <mat-sidenav-container id="container">
-        <mat-sidenav class="side-nav" [mode]="modeMenu" #sidenav opened>
+        <mat-sidenav class="side-nav" [mode]="modeMenu" #sidenav [opened]="isOpened">
             <app-menu></app-menu>
         </mat-sidenav>
         <mat-sidenav-content>

@@ -33,9 +33,9 @@ export class LoginComponent implements OnInit {
       username: ['', Validators.required],
       password: ['', Validators.required],
     });
-    setTimeout(() => {
+  /*  setTimeout(() => {
       this.isAnime = false;
-    }, 1500);
+    }, 1500);*/
 
     this.registerForm = this.formBuilder.group({
       userId: [0],

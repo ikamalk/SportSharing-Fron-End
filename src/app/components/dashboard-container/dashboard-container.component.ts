@@ -11,9 +11,11 @@ export class DashboardContainerComponent implements OnInit {
   @ViewChild("sidenav") sidenav:MatSidenav;
   public innerWidth: any;
   modeMenu:string = "side";
+  isOpened:boolean = false;
   constructor() { }
 
   ngOnInit(): void {
+    this.onResize(event);
   }
 
   @HostListener('window:resize', ['$event'])
@@ -21,14 +23,15 @@ export class DashboardContainerComponent implements OnInit {
   this.innerWidth = window.innerWidth;
   if(this.innerWidth < 992) {
     this.modeMenu = "over";
-    this.sidenav.close();
+    this.isOpened = false;
   } else {
     this.modeMenu = "side";
-    this.sidenav.open();
-
+    this.isOpened = true;
   }
-  
 }
+
+
+
 
   toggle(){
     this.sidenav.toggle();
