@@ -2,9 +2,9 @@
     <img [ngClass]="{slidecaption: startLoading}" [src]="imgLoader" alt="">
     <div class="txt">Please wait...</div>
 </div>
-<div id="desktop-container">
+<div id="desktop-container" *ngIf="!isMobile">
     
-    <div class="list-container" [hidden]="!loading" [ngStyle]="{'overflow':isNoRequest ? 'hidden' : 'auto' }">
+    <div class="list-container"  [hidden]="!loading" [ngStyle]="{'overflow':isNoRequest ? 'hidden' : 'auto' }">
         <ng-container *ngFor="let request of requests;let i = index">
             <div class="list">
                 <div [ngSwitch]="request.sport_type">
@@ -193,9 +193,9 @@
 
 <!----------------------------------------MOBILE--------------------------------------------------->
 
-<div id="mobile-container">
+<div id="mobile-container" *ngIf="isMobile " [hidden]="!loading">
    
-    <div class="maps-container"  [hidden]="!loading">
+    <div class="maps-container"  >
         <button mat-raised-button color="primary" *ngIf="onEventFocus" (click)="getAllRequest()">
             <i class="fa fa-map-marker"></i>
              Show All events</button>
