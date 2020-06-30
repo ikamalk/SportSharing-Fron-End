@@ -35,6 +35,8 @@ import { RequestDialog } from './components/my-request/requestDialog/request-dia
 import { MatNativeDateModule } from '@angular/material/core';
 import {MatSliderModule} from '@angular/material/slider';
 import { SecondToTimeDirective } from './secondsToTime';
+import { EventComponent } from './components/dashboard/event/event.component';
+import { SwiperModule, SwiperConfigInterface, SWIPER_CONFIG } from 'ngx-swiper-wrapper';
 
 let UrlForJwt = environment.urlForJWT;
 let url = environment.url;
@@ -42,6 +44,11 @@ let url = environment.url;
 export function tokenGetter() {
   return localStorage.getItem("token");
 }
+
+const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
+  direction: 'horizontal',
+  slidesPerView: 'auto'
+};
 @NgModule({
   entryComponents:[
     RequestDialog
@@ -57,7 +64,8 @@ export function tokenGetter() {
     ProfileComponent,
     MyRequestComponent,
     RequestDialog,
-    SecondToTimeDirective
+    SecondToTimeDirective,
+    EventComponent
   ],
   imports: [
     BrowserModule,
@@ -69,6 +77,7 @@ export function tokenGetter() {
     MatButtonToggleModule,
     MatTableModule,
     MatDialogModule,
+    SwiperModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production, registrationStrategy: 'registerImmediately' }),
     ReactiveFormsModule,
     MatButtonModule,
@@ -92,7 +101,12 @@ export function tokenGetter() {
     }),
     BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [
+    {
+    provide: SWIPER_CONFIG,
+    useValue: DEFAULT_SWIPER_CONFIG
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

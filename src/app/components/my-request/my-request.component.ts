@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, HostListener } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { RequestDialog } from './requestDialog/request-dialog';
 import { Account } from 'src/app/models/Account';
@@ -24,6 +24,8 @@ export class MyRequestComponent implements OnInit {
   pinslist:string[] = ["assets/pins/BaseballPin.png","assets/pins/BasketballPin.png","assets/pins/BowlingPin.png",
   "assets/pins/SoccerPin.png","assets/pins/FrisbeePin.png","assets/pins/TennisPin.png"];
   imgLoader:string=this.pinslist[5];
+  innerWidth:number;
+  isMobile:boolean = false;
   constructor(public dialog: MatDialog,private requestService:RequestService,
     private mapsAPILoader: MapsAPILoader,private participantService:ParticipantService,private cdr: ChangeDetectorRef) {
     this.account = JSON.parse(localStorage.getItem("account"));
@@ -36,6 +38,8 @@ export class MyRequestComponent implements OnInit {
     this.startpins();
     this.cdr.detectChanges();
   }
+
+
 
 
   startpins(){

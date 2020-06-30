@@ -30,6 +30,7 @@
     "moment": "^2.26.0",
     "moment-duration-format": "^2.3.2",
     "ngx-avatar": "^4.0.0",
+    "ngx-swiper-wrapper": "^9.0.1",
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"

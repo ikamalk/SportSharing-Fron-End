@@ -256,13 +256,19 @@
                float: right;
               }
         }
-        .list-container{
+        .swiper-container {
             position: absolute;
             bottom: 10px;
             height: 50%;
             width: calc(100% - 20px);
             left: 10px;
             right: 10px;
+        }
+        .list-container{
+            position: relative;
+            width: 100%;
+            height: 100%;
+
 
             .list{
                 width: calc(100% - 20px);
@@ -310,7 +316,7 @@
                     }
                 }
                 .type{
-                    height: 20%;
+                    height: 25%;
                     margin-top: 10px;
                     .item{
                         width: 33.33%;
@@ -341,7 +347,7 @@
                     opacity: 0.5;
                 }
                 .location-time-container{
-                    height: 30%;
+                    height: 35%;
                     .time, .location, .time-driver {
                         width: 33.33%;
                         display: inline-block;
@@ -359,9 +365,7 @@
                 .info{
                     height: 15%;
                     div:nth-child(1),div:nth-child(2),div:nth-child(3){
-                       /* width: 33.33%;
-                        display: inline-block;
-                        height: 50px;*/
+                     
                     }
                     .profile-container{
                         display: inline-block;

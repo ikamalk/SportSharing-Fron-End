@@ -1,4 +1,4 @@
-import { Component, OnInit, NgZone, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, NgZone, ChangeDetectorRef, HostListener } from '@angular/core';
 import { RequestService } from 'src/app/services/request.service';
 import { Account } from 'src/app/models/Account';
 import { MapsAPILoader } from '@agm/core';
@@ -8,6 +8,7 @@ import * as moment from 'moment';
 
 import { Participant } from 'src/app/models/Participant';
 import { ParticipantService } from 'src/app/services/participant.service';
+import { SwiperConfigInterface, SwiperComponent } from 'ngx-swiper-wrapper';
 declare var google;
 
 @Component({
@@ -293,10 +294,32 @@ export class DashboardComponent implements OnInit {
     }
     return value;
   }
+  config: SwiperConfigInterface = {
+    a11y: true,
+    direction: 'horizontal',
+    slidesPerView: 1,
+    slideToClickedSlide: true,
+    mousewheel: true,
+    scrollbar: false,
+    watchSlidesProgress: true,
+    navigation: true,
+    keyboard: true,
+    observer: true,
+    observeParents: true,
+    pagination: false,
+    centeredSlides: true,
+    loop: true,
+    roundLengths: true,
+    spaceBetween: 50,
+};
+innerWidth:number;
+isMobile:boolean = false;
+isSwiper:boolean = false;
+indexSwiper:number = 0;
   constructor(private requestService:RequestService,private mapsAPILoader: MapsAPILoader,
     private ngZone: NgZone,private participantService:ParticipantService,private cdr: ChangeDetectorRef) {
     this.account = JSON.parse(localStorage.getItem("account"));
-
+    this.onResize(event);
     this.getAllRequest();
 
   }
@@ -308,6 +331,32 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
 
   }
+
+  SwiperDisabled() {
+    this.isSwiper = false;
+    this.zoom = 11;
+  }
+
+  onIndexChange(index:number){
+    this.latitude = this.requests[index].lat-0.005;
+    this.longitude = this.requests[index].lng;
+    this.zoom = 15;
+
+  }
+
+
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event) {
+  this.innerWidth = window.innerWidth;
+  if(this.innerWidth < 992) {
+    this.isMobile = true;
+    
+  } else {
+    this.isMobile = false;
+  }
+}
+  
 
 
   getMyParticipationsFunc(){
@@ -332,17 +381,20 @@ export class DashboardComponent implements OnInit {
       })
     }, 250);
   }
+
   ngAfterViewInit(){
     let i = 0;
     this.startLoading =true;
     this.startpins();
     this.cdr.detectChanges();
-
   }
 
 
 
   async getAllRequest(){
+    if(this.isMobile) {
+      this.SwiperDisabled();
+    }
     this.onEventFocus = false;
    await this.setCurrentLocation();
    this.requestService.getAllRequest(this.latitude,this.longitude,this.radius/1609).then(requests=>{
@@ -367,19 +419,6 @@ export class DashboardComponent implements OnInit {
 
 
 
-
-
-  /*showHideMarkers(){
-    Object.values(this.markers).forEach((value,index) => {
-      let condition =this.getDistanceBetween(value.lat,value.lng,this.latitude,this.longitude);
-      value.isShown = condition;
-      this.requests[index]['isShown'] = condition;
-      if(index == this.markers.length -1) {
-        this.isNoRequest =this.requests.every(this.isFalse);
-      }
-    });
-  }*/
-
   isFalse(element:Request, index, array) {
     return element.isShown == false;
   }
@@ -393,10 +432,17 @@ export class DashboardComponent implements OnInit {
 
   seePosition(index:number){
     this.onEventFocus =true;
-    this.latitude = this.requests[index].lat-0.0015;
+    if(this.isMobile) {
+      this.isSwiper = true;
+      this.latitude = this.requests[index].lat-0.005;
+      this.indexSwiper = index;
+    } else {
+      this.latitude = this.requests[index].lat;
+      this.requests = [this.requests[index]];
+    }
+
     this.longitude = this.requests[index].lng;
     this.zoom = 15;
-    this.requests = [this.requests[index]];
   }
 
   join(request:Request){

@@ -1,8 +1,9 @@
+<div class="loader" [hidden]="loading">
+    <img [ngClass]="{slidecaption: startLoading}" [src]="imgLoader" alt="">
+    <div class="txt">Please wait...</div>
+</div>
 <div id="desktop-container">
-    <div class="loader" [hidden]="loading">
-        <img [ngClass]="{slidecaption: startLoading}" [src]="imgLoader" alt="">
-        <div class="txt">Please wait...</div>
-    </div>
+    
     <div class="list-container" [hidden]="!loading" [ngStyle]="{'overflow':isNoRequest ? 'hidden' : 'auto' }">
         <ng-container *ngFor="let request of requests;let i = index">
             <div class="list">
@@ -147,7 +148,7 @@
     
     </div>
     <div class="maps-container"  [hidden]="!loading">
-        <button mat-raised-button color="primary" *ngIf="onEventFocus" (click)="getAllRequest()">
+        <button mat-raised-button color="primary" *ngIf="onEventFocus" (click)="SwiperDisabled();getAllRequest();">
             <i class="fa fa-map-marker"></i>
              Show All events</button>
              <div id="slider">
@@ -167,6 +168,7 @@
         [longitude]="longitude"
         [zoom]="zoom"
         [streetViewControl]="false"
+
         [styles]="style">
         <ng-container *ngFor="let request of requests;let i = index">
             <agm-marker  (markerClick)="seePosition(i)" [latitude]="request.lat" [longitude]="request.lng" [markerDraggable]="false"
@@ -213,6 +215,7 @@
         <agm-map [latitude]="latitude"
         [longitude]="longitude"
         [zoom]="zoom"
+        (mapClick)="SwiperDisabled()"
         [streetViewControl]="false"
         [styles]="style">
         <ng-container *ngFor="let request of requests;let i = index">
@@ -229,150 +232,146 @@
         </ng-container>
        <agm-circle *ngIf="latitude" [latitude]="latitude" [longitude]="longitude" [radius]="radius" [fillColor]="'yellow'"
             [circleDraggable]="false" [editable]="false" 
-            (radiusChange)="getAllRequest()">
+            (radiusChange)="getAllRequest()" (circleClick)="SwiperDisabled()">
         </agm-circle>
         </agm-map>
     </div>
-    <div class="list-container" [hidden]="!loading">
-        <ng-container>
-            <div class="list">
-                <div [ngSwitch]="requests[0].sport_type">
-                    <div *ngSwitchCase="'Basketball'">
-                        <img class="background-img" src="assets/Basketball.png" alt="">
-                    </div>
-                    <div *ngSwitchCase="'Soccer'">
-                        <img class="background-img" src="assets/Soccer.png" alt="">
-                    </div>
-                    <div *ngSwitchCase="'Baseball'">
-                        <img class="background-img" src="assets/Baseball.png" alt="">
-                    </div>
-                    <div *ngSwitchCase="'Frisbee'">
-                        <img class="background-img" src="assets/Frisbee.png" alt="">
-                    </div>
-                    <div *ngSwitchCase="'Football'">
-                        <img class="background-img" src="assets/Football.png" alt="">
-                    </div>
-                    <div *ngSwitchCase="'Lacrosse'">
-                        <img class="background-img" src="assets/Lacrosse.png" alt="">
-                    </div>
-                    <div *ngSwitchCase="'Bowling'">
-                        <img class="background-img" src="assets/Bowling.png" alt="">
-                    </div>
-                    <div *ngSwitchCase="'Golf'">
-                        <img class="background-img" src="assets/Golf.png" alt="">
-                    </div>
-                    <div *ngSwitchCase="'Volleyball'">
-                        <img class="background-img" src="assets/Volleyball.png" alt="">
-                    </div>
-                    <div *ngSwitchDefault></div>
-                </div>
-                <div class="title">
-                    <div [ngSwitch]="requests[0].sport_type">
+    <swiper class="swiper-container" [hidden]="!isSwiper" *ngIf="requests" [config]="config" [index]="indexSwiper" (indexChange)="onIndexChange($event)">
+            <div *ngFor="let request of requests; let i = index" class="list-container swiper-slide cursor-pointer">
+                <div class="list">
+                    <div [ngSwitch]="request.sport_type">
                         <div *ngSwitchCase="'Basketball'">
-                            <img src="assets/Basketball.png" alt="">
+                            <img class="background-img" src="assets/Basketball.png" alt="">
                         </div>
                         <div *ngSwitchCase="'Soccer'">
-                            <img src="assets/Soccer.png" alt="">
+                            <img class="background-img" src="assets/Soccer.png" alt="">
                         </div>
                         <div *ngSwitchCase="'Baseball'">
-                            <img src="assets/Baseball.png" alt="">
+                            <img class="background-img" src="assets/Baseball.png" alt="">
                         </div>
                         <div *ngSwitchCase="'Frisbee'">
-                            <img src="assets/Frisbee.png" alt="">
+                            <img class="background-img" src="assets/Frisbee.png" alt="">
                         </div>
                         <div *ngSwitchCase="'Football'">
-                            <img src="assets/Football.png" alt="">
+                            <img class="background-img" src="assets/Football.png" alt="">
                         </div>
                         <div *ngSwitchCase="'Lacrosse'">
-                            <img src="assets/Lacrosse.png" alt="">
+                            <img class="background-img" src="assets/Lacrosse.png" alt="">
                         </div>
                         <div *ngSwitchCase="'Bowling'">
-                            <img src="assets/Bowling.png" alt="">
+                            <img class="background-img" src="assets/Bowling.png" alt="">
                         </div>
                         <div *ngSwitchCase="'Golf'">
-                            <img src="assets/Golf.png" alt="">
+                            <img class="background-img" src="assets/Golf.png" alt="">
                         </div>
                         <div *ngSwitchCase="'Volleyball'">
-                            <img src="assets/Volleyball.png" alt="">
+                            <img class="background-img" src="assets/Volleyball.png" alt="">
                         </div>
                         <div *ngSwitchDefault></div>
                     </div>
-                    <div>{{requests[0].sport_type}}</div>
-                </div>
-                <div class="type">
-                    <div class="item">
-                        <div>{{requests[0].player}}</div>
-                      <div>Players</div>
-                    </div>
-                    <div class="item">
-                        <div>{{requests[0].player_miss}}</div>
-                        <div>Missing</div>
-                    </div>
-                    <div class="item">
-                        <div>
-                            <div class="stars-outer" style="font-size:15px">
-                                <div class="stars-inner"  class="stars-inner"
-                                [ngStyle]="{ width: stars(requests[0].skill_level) }"></div>
-                              </div>
+                    <div class="title">
+                        <div [ngSwitch]="request.sport_type">
+                            <div *ngSwitchCase="'Basketball'">
+                                <img src="assets/Basketball.png" alt="">
+                            </div>
+                            <div *ngSwitchCase="'Soccer'">
+                                <img src="assets/Soccer.png" alt="">
+                            </div>
+                            <div *ngSwitchCase="'Baseball'">
+                                <img src="assets/Baseball.png" alt="">
+                            </div>
+                            <div *ngSwitchCase="'Frisbee'">
+                                <img src="assets/Frisbee.png" alt="">
+                            </div>
+                            <div *ngSwitchCase="'Football'">
+                                <img src="assets/Football.png" alt="">
+                            </div>
+                            <div *ngSwitchCase="'Lacrosse'">
+                                <img src="assets/Lacrosse.png" alt="">
+                            </div>
+                            <div *ngSwitchCase="'Bowling'">
+                                <img src="assets/Bowling.png" alt="">
+                            </div>
+                            <div *ngSwitchCase="'Golf'">
+                                <img src="assets/Golf.png" alt="">
+                            </div>
+                            <div *ngSwitchCase="'Volleyball'">
+                                <img src="assets/Volleyball.png" alt="">
+                            </div>
+                            <div *ngSwitchDefault></div>
                         </div>
-                        <div>
-                           Skill level
+                        <div>{{request.sport_type}}</div>
+                    </div>
+                    <div class="type">
+                        <div class="item">
+                            <div>{{request.player}}</div>
+                          <div>Players</div>
+                        </div>
+                        <div class="item">
+                            <div>{{request.player_miss}}</div>
+                            <div>Missing</div>
+                        </div>
+                        <div class="item">
+                            <div>
+                                <div class="stars-outer" style="font-size:15px">
+                                    <div class="stars-inner"  class="stars-inner"
+                                    [ngStyle]="{ width: stars(requests[0].skill_level) }"></div>
+                                  </div>
+                            </div>
+                            <div>
+                               Skill level
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="devider"></div>
-                <div class="location-time-container">
-                    <div class="time">
-                        <i class="fa fa-clock-o"></i>
-                        <div>{{requests[0].time_schedule.split("T")[0]}} at {{requests[0].time_schedule.split("T")[1]}}</div>
+                    <div class="devider"></div>
+                    <div class="location-time-container">
+                        <div class="time">
+                            <i class="fa fa-clock-o"></i>
+                            <div>{{request.time_schedule.split("T")[0]}} at {{request.time_schedule.split("T")[1]}}</div>
+                        </div>
+                        <div class="location">
+                            <i class="fa fa-map-marker"></i>
+                            <div>{{request.address}}</div>
+                        </div>
+                        <div class="time-driver">
+                            <i class="fa fa-car" ></i>
+                            <div [appTime]="11111"></div>
+                        </div>
                     </div>
-                    <div class="location">
-                        <i class="fa fa-map-marker"></i>
-                        <div>{{requests[0].address}}</div>
-                    </div>
-                    <div class="time-driver">
-                        <i class="fa fa-car" ></i>
-                        <div [appTime]="requests[0].duration"></div>
-                    </div>
-                </div>
-                <div class="devider"></div>
-                <div class="info">
-                    <div class="profile-container">
-                    <!--    <div class="profile">
-                            <ngx-avatar name="{{request.account.firstname}} {{request.account.lastname}}" class="image-profile"></ngx-avatar>
-                             <div class="full-name-container">
-                                 <div class="full-name">
-                                    {{request.account.firstname}} {{request.account.lastname}}
+                    <div class="devider"></div>
+                    <div class="info">
+                        <div class="profile-container">
+                        <!--    <div class="profile">
+                                <ngx-avatar name="{{request.account.firstname}} {{request.account.lastname}}" class="image-profile"></ngx-avatar>
+                                 <div class="full-name-container">
+                                     <div class="full-name">
+                                        {{request.account.firstname}} {{request.account.lastname}}
+                                     </div>
+                                     <div class="description">
+                                        {{request.account.city}},{{request.account.state}}
+                                     </div>
                                  </div>
-                                 <div class="description">
-                                    {{request.account.city}},{{request.account.state}}
-                                 </div>
-                             </div>
-                         </div>  -->
+                             </div>  
+                        </div> -->
+            
+            
+                        <div class="position-btn-container">
+                            <button mat-raised-button color="primary" (click)="seePosition(i)"><i class="fa fa-map-marker"></i> See location</button>
+                        </div>
+                        <div class="accept-btn-container">
+            
+                            <button mat-raised-button color="primary" *ngIf="!myParticipations.includes(request.id)" (click)="join(request)" [disabled]="account['id'] == request.account.id">Join</button>
+                            <button mat-raised-button color="primary" *ngIf="myParticipations.includes(request.id)" disabled>You Joined !</button>
+                        </div>
+            
                     </div>
-        
-        
-                    <div class="position-btn-container">
-                        <button mat-raised-button color="primary" (click)="seePosition(i)"><i class="fa fa-map-marker"></i> See location</button>
-                    </div>
-                    <div class="accept-btn-container">
-        
-                        <button mat-raised-button color="primary" *ngIf="!myParticipations.includes(requests[0].id)" (click)="join(request)" [disabled]="account['id'] == requests[0].account.id">Join</button>
-                        <button mat-raised-button color="primary" *ngIf="myParticipations.includes(requests[0].id)" disabled>You Joined !</button>
-                    </div>
-        
+                  
                 </div>
-               <!-- <div style="display: flex;width: 100%;">
-                <div style="background-color: red;width: 100%;">dffgdg</div>
-                <div style="background-color: blue;width: 100%;">dffgdg</div>
-                <div style="background-color: green;width: 100%;">dffgdg</div>
-                <div style="background-color: purple;width: 100%;">dffgdg</div>
-            </div> -->
+            </div> 
             </div>
-    
-        </ng-container>
-    
-    </div>
+
+    </swiper>
+  <!--   -->
 </div>
 
 
