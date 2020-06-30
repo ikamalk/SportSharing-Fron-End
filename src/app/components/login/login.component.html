@@ -1,5 +1,5 @@
 
-<div id="desktop-container">
+<div id="desktop-container" *ngIf="!isMobile">
   <div id="background"></div>
   <div id="container">
   
@@ -181,7 +181,7 @@
   </div>
 </div>
 
-<div id="mobile-container">
+<div id="mobile-container" *ngIf="isMobile">
   <div id="background"></div>
   <div id="container">
   

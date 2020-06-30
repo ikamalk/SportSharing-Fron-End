@@ -311,11 +311,10 @@
         #card{
           position: absolute;
           top: 80px;
-          width: 80%;
-          margin-left: 10%;
+          width: 90%;
+          margin-left: 5%;
           border: $primary-color solid 1px;
           border-radius: 20px;
-          height: 500px;
           display: block;
           box-shadow: -5px 1px 20px #00000082;
         //  clip-path: circle(80% at 50% 50%);
@@ -378,6 +377,8 @@
               color: rgb(65, 65, 65);
               text-align: center;
               margin-top: 20px;
+              margin-bottom: 20px;
+
               span{
                 color: $primary-color;
                 font-weight: 700;

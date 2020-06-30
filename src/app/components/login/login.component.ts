@@ -1,8 +1,9 @@
-import { Component, OnInit, ViewChild, ElementRef, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, ChangeDetectorRef, HostListener } from '@angular/core';
 import { ServiceService } from 'src/app/service.service';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AccountService } from 'src/app/services/account.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 declare var $;
 declare var Cleave;
 
@@ -24,10 +25,13 @@ export class LoginComponent implements OnInit {
   isLoginSuccess = false;
   isRegisterSuccess = false;
   isLoginFailure = false;
+  innerWidth:number;
+  isMobile:boolean = false;
   @ViewChild("msgRegister",{static:false}) msgRegister:ElementRef;
 
   constructor(private service:ServiceService,public formBuilder: FormBuilder,private router:Router,
-    private accountService:AccountService, private changeDetector : ChangeDetectorRef) {
+    private accountService:AccountService, private changeDetector : ChangeDetectorRef,private snackbar:MatSnackBar) {
+      this.onResize(event)
       this.checkSession();
     this.loginForm = this.formBuilder.group({
       username: ['', Validators.required],
@@ -68,6 +72,16 @@ export class LoginComponent implements OnInit {
       }); 
     }, 2100);
   }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event) {
+  this.innerWidth = window.innerWidth;
+  if(this.innerWidth < 992) {
+    this.isMobile = true;
+  } else {
+    this.isMobile = false;
+  }
+}
 
 
 
@@ -120,6 +134,12 @@ export class LoginComponent implements OnInit {
       this.isLoginSuccess = true;
       this.isRegisterSuccess = false;
       this.isLoginFailure = false;
+      if(this.isMobile) {
+        this.snackbar.open("Welcome to pickup !", null, {
+          duration: 2000,
+        });
+      }
+
     }
     // when credentials are not verified, this fucntion is called and produces the failure message.
     failureLogin() {
@@ -127,6 +147,11 @@ export class LoginComponent implements OnInit {
       this.isLoginSuccess = false;
       this.isRegisterSuccess = false;
       this.isLoginFailure = true;
+      if(this.isMobile) {
+        this.snackbar.open("Please verify your username and password!", null, {
+          duration: 2000,
+        });
+      }
     }
     // this fucntion is called when registration is successful.
     MsgRegister() {
@@ -135,6 +160,11 @@ export class LoginComponent implements OnInit {
       this.isRegisterSuccess = true;
       this.isLoginFailure = false;
       this.changeDetector.detectChanges();
+      if(this.isMobile) {
+        this.snackbar.open("You've registered successfully!, now you can login", null, {
+          duration: 2000,
+        });
+      }
     }
 
 }
